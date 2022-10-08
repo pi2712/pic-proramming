@@ -1,0 +1,12 @@
+_lcd_busy: CODE, 1961 0 39
+_lcd_putc: CODE, 1583 0 47
+_putch: CODE, 1503 0 2
+_lcd_put_byte: CODE, 1817 0 144
+_main: CODE, 1243 0 135
+___lwdiv: CODE, 1505 0 42
+_lcd_gotoxy: CODE, 2014 0 24
+_printf: CODE, 1378 0 125
+___lwmod: CODE, 1547 0 36
+_lcd_init: CODE, 1630 0 187
+_isprint: CODE, 2000 0 14
+Total: 795
