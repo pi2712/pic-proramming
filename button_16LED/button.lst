@@ -1,0 +1,2170 @@
+
+
+HI-TECH Software PIC PRO Macro Assembler V9.83 build 10920 
+                                                                                               Thu Mar 17 09:29:40 2022
+
+HI-TECH Software Omniscient Code Generator (PRO mode) build 10920
+     1                           	processor	16F887
+     2                           	opt	pw 120
+     3                           	opt	pm
+     4                           	psect	config,global,class=CONFIG,delta=2
+     5                           	psect	text358,local,class=CODE,delta=2
+     6                           	psect	cinit,global,class=CODE,delta=2
+     7                           	psect	bitbssCOMMON,global,bit,class=COMMON,space=1,delta=1
+     8                           	psect	bssCOMMON,global,class=COMMON,space=1,delta=1
+     9                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1
+    10                           	psect	cstackBANK0,global,class=BANK0,space=1,delta=1
+    11                           	psect	maintext,global,class=CODE,delta=2
+    12                           	psect	text359,local,class=CODE,delta=2
+    13                           	psect	text360,local,class=CODE,delta=2
+    14                           	psect	text361,local,class=CODE,delta=2
+    15                           	psect	text362,local,class=CODE,delta=2
+    16                           	psect	text363,local,class=CODE,delta=2
+    17                           	psect	text364,local,class=CODE,delta=2
+    18                           	psect	text365,local,class=CODE,delta=2
+    19                           	psect	text366,local,class=CODE,delta=2
+    20                           	psect	text367,local,class=CODE,delta=2
+    21                           	psect	intentry,global,class=CODE,delta=2
+    22                           	psect	text368,local,class=CODE,delta=2
+    23                           	psect	pa_nodes,global,class=CODE,delta=2
+    24                           	dabs	1,0x7E,2
+    25  000A                     	;#
+    26                           
+    27                           	psect	config
+    28  2007  E3E2               	dw	58338	;#
+    29                           
+    30                           	psect	text358
+    31  0000                     __ptext358:	
+    32  0007                     _PORTC	set	7
+    33  0008                     _PORTD	set	8
+    34  005F                     _GIE	set	95
+    35  005E                     _PEIE	set	94
+    36  0030                     _RB0	set	48
+    37  0031                     _RB1	set	49
+    38  0032                     _RB2	set	50
+    39  0033                     _RB3	set	51
+    40  0034                     _RB4	set	52
+    41  0035                     _RB5	set	53
+    42  0036                     _RB6	set	54
+    43  0037                     _RB7	set	55
+    44  005B                     _RBIE	set	91
+    45  0058                     _RBIF	set	88
+    46  0096                     _IOCB	set	150
+    47  0086                     _TRISB	set	134
+    48  0087                     _TRISC	set	135
+    49  0088                     _TRISD	set	136
+    50  0188                     _ANSEL	set	392
+    51  0189                     _ANSELH	set	393
+    52                           
+    53                           	psect	cinit
+    54  0390                     start_initialization:	
+    55                           
+    56                           ; Clear objects allocated to BITCOMMON
+    57  0390  01F0               	clrf	(__pbitbssCOMMON/(0+8))& (0+127)
+    58                           
+    59                           ; Clear objects allocated to COMMON
+    60  0391  01F6               	clrf	__pbssCOMMON& (0+127)
+    61  0392  01F7               	clrf	(__pbssCOMMON+1)& (0+127)
+    62  0393                     end_of_initialization:	
+    63                           ;End of C runtime variable initialization code
+    64                           
+    65  0393  0183               	clrf	3
+    66  0394  120A  118A  280F   	ljmp	_main	;jump to C main() function
+    67                           
+    68                           	psect	bitbssCOMMON
+    69  0380                     __pbitbssCOMMON:	
+    70  0380                     _fl_RB0:	
+    71  0380                     	ds	1
+    72  0381                     _fl_RB1:	
+    73  0381                     	ds	1
+    74  0382                     _fl_RB2:	
+    75  0382                     	ds	1
+    76  0383                     _fl_RB3:	
+    77  0383                     	ds	1
+    78  0384                     _fl_RB4:	
+    79  0384                     	ds	1
+    80  0385                     _fl_RB5:	
+    81  0385                     	ds	1
+    82  0386                     _fl_RB6:	
+    83  0386                     	ds	1
+    84  0387                     _fl_RB7:	
+    85  0387                     	ds	1
+    86                           
+    87                           	psect	bssCOMMON
+    88  0076                     __pbssCOMMON:	
+    89  0076                     _i:	
+    90  0076                     	ds	2
+    91                           
+    92                           	psect	cstackCOMMON
+    93  0071                     __pcstackCOMMON:	
+    94  0071                     ?_rb0:	
+    95  0071                     ?_rb1:	
+    96                           ; 0 bytes @ 0x0
+    97                           
+    98  0071                     ?_rb2:	
+    99                           ; 0 bytes @ 0x0
+   100                           
+   101  0071                     ?_rb3:	
+   102                           ; 0 bytes @ 0x0
+   103                           
+   104  0071                     ?_rb4:	
+   105                           ; 0 bytes @ 0x0
+   106                           
+   107  0071                     ?_rb5:	
+   108                           ; 0 bytes @ 0x0
+   109                           
+   110  0071                     ?_rb6:	
+   111                           ; 0 bytes @ 0x0
+   112                           
+   113  0071                     ?_rb7:	
+   114                           ; 0 bytes @ 0x0
+   115                           
+   116  0071                     ?_ngat:	
+   117                           ; 0 bytes @ 0x0
+   118                           
+   119  0071                     ??_ngat:	
+   120                           ; 0 bytes @ 0x0
+   121                           
+   122  0071                     ?_main:	
+   123                           ; 0 bytes @ 0x0
+   124                           
+   125                           
+   126                           ; 2 bytes @ 0x0
+   127  0071                     	ds	5
+   128                           
+   129                           	psect	cstackBANK0
+   130  0020                     __pcstackBANK0:	
+   131  0020                     ??_rb0:	
+   132  0020                     ??_rb1:	
+   133                           ; 0 bytes @ 0x0
+   134                           
+   135  0020                     ??_rb2:	
+   136                           ; 0 bytes @ 0x0
+   137                           
+   138  0020                     ??_rb3:	
+   139                           ; 0 bytes @ 0x0
+   140                           
+   141  0020                     ??_rb4:	
+   142                           ; 0 bytes @ 0x0
+   143                           
+   144  0020                     ??_rb5:	
+   145                           ; 0 bytes @ 0x0
+   146                           
+   147  0020                     ??_rb6:	
+   148                           ; 0 bytes @ 0x0
+   149                           
+   150  0020                     ??_rb7:	
+   151                           ; 0 bytes @ 0x0
+   152                           
+   153                           
+   154                           ; 0 bytes @ 0x0
+   155  0020                     	ds	3
+   156  0023                     ??_main:	
+   157                           
+   158                           ; 0 bytes @ 0x3
+   159  0023                     	ds	3
+   160                           
+   161                           	psect	maintext
+   162  000F                     __pmaintext:	
+   163 ;;Data sizes: Strings 0, constant 0, data 0, bss 2, persistent 0 stack 0
+   164 ;;Auto spaces:   Size  Autos    Used
+   165 ;; COMMON          14      5       8
+   166 ;; BANK0           80      6       6
+   167 ;; BANK1           80      0       0
+   168 ;; BANK3           96      0       0
+   169 ;; BANK2           96      0       0
+   170 ;;
+   171 ;; Pointer list with targets:
+   172 ;;
+   173 ;; Critical Paths under _main in COMMON
+   174 ;;
+   175 ;;   None.
+   176 ;;
+   177 ;; Critical Paths under _ngat in COMMON
+   178 ;;
+   179 ;;   None.
+   180 ;;
+   181 ;; Critical Paths under _main in BANK0
+   182 ;;
+   183 ;;   _main->_rb0
+   184 ;;   _main->_rb1
+   185 ;;   _main->_rb2
+   186 ;;   _main->_rb3
+   187 ;;   _main->_rb4
+   188 ;;   _main->_rb5
+   189 ;;   _main->_rb6
+   190 ;;   _main->_rb7
+   191 ;;
+   192 ;; Critical Paths under _ngat in BANK0
+   193 ;;
+   194 ;;   None.
+   195 ;;
+   196 ;; Critical Paths under _main in BANK1
+   197 ;;
+   198 ;;   None.
+   199 ;;
+   200 ;; Critical Paths under _ngat in BANK1
+   201 ;;
+   202 ;;   None.
+   203 ;;
+   204 ;; Critical Paths under _main in BANK3
+   205 ;;
+   206 ;;   None.
+   207 ;;
+   208 ;; Critical Paths under _ngat in BANK3
+   209 ;;
+   210 ;;   None.
+   211 ;;
+   212 ;; Critical Paths under _main in BANK2
+   213 ;;
+   214 ;;   None.
+   215 ;;
+   216 ;; Critical Paths under _ngat in BANK2
+   217 ;;
+   218 ;;   None.
+   219 ;;
+   220 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   221 ;;
+   222 ;;
+   223 ;;Call Graph Tables:
+   224 ;;
+   225 ;; ---------------------------------------------------------------------------------
+   226 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   227 ;; ---------------------------------------------------------------------------------
+   228 ;; (0) _main                                                 3     3      0       0
+   229 ;;                                              3 BANK0      3     3      0
+   230 ;;                                _rb0
+   231 ;;                                _rb1
+   232 ;;                                _rb2
+   233 ;;                                _rb3
+   234 ;;                                _rb4
+   235 ;;                                _rb5
+   236 ;;                                _rb6
+   237 ;;                                _rb7
+   238 ;; ---------------------------------------------------------------------------------
+   239 ;; (1) _rb7                                                  3     3      0       0
+   240 ;;                                              0 BANK0      3     3      0
+   241 ;; ---------------------------------------------------------------------------------
+   242 ;; (1) _rb6                                                  3     3      0       0
+   243 ;;                                              0 BANK0      3     3      0
+   244 ;; ---------------------------------------------------------------------------------
+   245 ;; (1) _rb5                                                  3     3      0       0
+   246 ;;                                              0 BANK0      3     3      0
+   247 ;; ---------------------------------------------------------------------------------
+   248 ;; (1) _rb4                                                  3     3      0       0
+   249 ;;                                              0 BANK0      3     3      0
+   250 ;; ---------------------------------------------------------------------------------
+   251 ;; (1) _rb3                                                  3     3      0       0
+   252 ;;                                              0 BANK0      3     3      0
+   253 ;; ---------------------------------------------------------------------------------
+   254 ;; (1) _rb2                                                  3     3      0       0
+   255 ;;                                              0 BANK0      3     3      0
+   256 ;; ---------------------------------------------------------------------------------
+   257 ;; (1) _rb1                                                  3     3      0       0
+   258 ;;                                              0 BANK0      3     3      0
+   259 ;; ---------------------------------------------------------------------------------
+   260 ;; (1) _rb0                                                  3     3      0       0
+   261 ;;                                              0 BANK0      3     3      0
+   262 ;; ---------------------------------------------------------------------------------
+   263 ;; Estimated maximum stack depth 1
+   264 ;; ---------------------------------------------------------------------------------
+   265 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   266 ;; ---------------------------------------------------------------------------------
+   267 ;; (2) _ngat                                                 5     5      0       0
+   268 ;;                                              0 COMMON     5     5      0
+   269 ;; ---------------------------------------------------------------------------------
+   270 ;; Estimated maximum stack depth 2
+   271 ;; ---------------------------------------------------------------------------------
+   272 ;; Call Graph Graphs:
+   273 ;; _main (ROOT)
+   274 ;;   _rb0
+   275 ;;   _rb1
+   276 ;;   _rb2
+   277 ;;   _rb3
+   278 ;;   _rb4
+   279 ;;   _rb5
+   280 ;;   _rb6
+   281 ;;   _rb7
+   282 ;;
+   283 ;; _ngat (ROOT)
+   284 ;;
+   285 ;; Address spaces:
+   286 ;;Name               Size   Autos  Total    Cost      Usage
+   287 ;;BITCOMMON            E      0       1       0        7.1%
+   288 ;;EEDATA             100      0       0       0        0.0%
+   289 ;;NULL                 0      0       0       0        0.0%
+   290 ;;CODE                 0      0       0       0        0.0%
+   291 ;;COMMON               E      5       8       1       57.1%
+   292 ;;BITSFR0              0      0       0       1        0.0%
+   293 ;;SFR0                 0      0       0       1        0.0%
+   294 ;;BITSFR1              0      0       0       2        0.0%
+   295 ;;SFR1                 0      0       0       2        0.0%
+   296 ;;STACK                0      0       1       2        0.0%
+   297 ;;ABS                  0      0       E       3        0.0%
+   298 ;;BITBANK0            50      0       0       4        0.0%
+   299 ;;BITSFR3              0      0       0       4        0.0%
+   300 ;;SFR3                 0      0       0       4        0.0%
+   301 ;;BANK0               50      6       6       5        7.5%
+   302 ;;BITSFR2              0      0       0       5        0.0%
+   303 ;;SFR2                 0      0       0       5        0.0%
+   304 ;;BITBANK1            50      0       0       6        0.0%
+   305 ;;BANK1               50      0       0       7        0.0%
+   306 ;;BITBANK3            60      0       0       8        0.0%
+   307 ;;BANK3               60      0       0       9        0.0%
+   308 ;;BITBANK2            60      0       0      10        0.0%
+   309 ;;BANK2               60      0       0      11        0.0%
+   310 ;;DATA                 0      0       F      12        0.0%
+   311                           
+   312                           
+   313 ;; *************** function _main *****************
+   314 ;; Defined at:
+   315 ;;		line 15 in file "C:\Online Class\HK6\Practice_Micro\button_16LED\button.c"
+   316 ;; Parameters:    Size  Location     Type
+   317 ;;		None
+   318 ;; Auto vars:     Size  Location     Type
+   319 ;;		None
+   320 ;; Return value:  Size  Location     Type
+   321 ;;                  2  1060[COMMON] int 
+   322 ;; Registers used:
+   323 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+   324 ;; Tracked objects:
+   325 ;;		On entry : 17F/0
+   326 ;;		On exit  : 0/0
+   327 ;;		Unchanged: 0/0
+   328 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   329 ;;      Params:         0       0       0       0       0
+   330 ;;      Locals:         0       0       0       0       0
+   331 ;;      Temps:          0       3       0       0       0
+   332 ;;      Totals:         0       3       0       0       0
+   333 ;;Total ram usage:        3 bytes
+   334 ;; Hardware stack levels required when called:    2
+   335 ;; This function calls:
+   336 ;;		_rb0
+   337 ;;		_rb1
+   338 ;;		_rb2
+   339 ;;		_rb3
+   340 ;;		_rb4
+   341 ;;		_rb5
+   342 ;;		_rb6
+   343 ;;		_rb7
+   344 ;; This function is called by:
+   345 ;;		Startup code after reset
+   346 ;; This function uses a non-reentrant model
+   347 ;;
+   348  000F                     _main:	
+   349                           
+   350                           ;button.c: 16: ANSEL=ANSELH=0;
+   351                           
+   352                           ; Regs used in _main: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+   353  000F  1683               	bsf	3,5	;RP0=1, select bank3
+   354  0010  1703               	bsf	3,6	;RP1=1, select bank3
+   355  0011  0189               	clrf	9	;volatile
+   356  0012  0188               	clrf	8	;volatile
+   357                           
+   358                           ;button.c: 17: IOCB=0XFF;
+   359  0013  30FF               	movlw	255
+   360  0014  1303               	bcf	3,6	;RP1=0, select bank1
+   361  0015  0096               	movwf	22	;volatile
+   362                           
+   363                           ;button.c: 18: RBIF=0;
+   364  0016  100B               	bcf	11,0
+   365                           
+   366                           ;button.c: 19: RBIE=1;
+   367  0017  158B               	bsf	11,3
+   368                           
+   369                           ;button.c: 20: GIE=1;
+   370  0018  178B               	bsf	11,7
+   371                           
+   372                           ;button.c: 21: PEIE=1;
+   373  0019  170B               	bsf	11,6
+   374                           
+   375                           ;button.c: 23: TRISB=0XFF;
+   376  001A  0086               	movwf	6	;volatile
+   377                           
+   378                           ;button.c: 24: TRISC=0X00;
+   379  001B  0187               	clrf	7	;volatile
+   380                           
+   381                           ;button.c: 25: TRISD=0X00;
+   382  001C  0188               	clrf	8	;volatile
+   383                           
+   384                           ;button.c: 27: PORTC=0XFF;
+   385  001D  1283               	bcf	3,5	;RP0=0, select bank0
+   386  001E  0087               	movwf	7	;volatile
+   387                           
+   388                           ;button.c: 28: PORTD=0XFF;
+   389  001F  0088               	movwf	8	;volatile
+   390  0020  28C1               	goto	l3129
+   391  0021                     l3131:	
+   392                           
+   393                           ;button.c: 35: {
+   394                           ;button.c: 36: PORTC=0X00;
+   395  0021  1283               	bcf	3,5	;RP0=0, select bank0
+   396  0022  1303               	bcf	3,6	;RP1=0, select bank0
+   397  0023  0187               	clrf	7	;volatile
+   398                           
+   399                           ;button.c: 37: PORTD=0X00;
+   400  0024  0188               	clrf	8	;volatile
+   401                           
+   402                           ;button.c: 38: _delay((unsigned long)((50)*(20000000/4000.0)));
+   403  0025  3002               	movlw	2
+   404  0026  00A5               	movwf	??_main+2
+   405  0027  3045               	movlw	69
+   406  0028  00A4               	movwf	??_main+1
+   407  0029  30A9               	movlw	169
+   408  002A  00A3               	movwf	??_main
+   409  002B                     u557:	
+   410  002B  0BA3               	decfsz	??_main,f
+   411  002C  282B               	goto	u557
+   412  002D  0BA4               	decfsz	??_main+1,f
+   413  002E  282B               	goto	u557
+   414  002F  0BA5               	decfsz	??_main+2,f
+   415  0030  282B               	goto	u557
+   416  0031  2832               	nop2
+   417                           
+   418                           ;button.c: 39: rb0();
+   419  0032  120A  118A  229D   	fcall	_rb0
+      +       120A  118A         
+   420                           
+   421                           ;button.c: 40: }
+   422  0037  28C1               	goto	l3129
+   423  0038                     l3137:	
+   424                           
+   425                           ;button.c: 42: {
+   426                           ;button.c: 43: PORTC=0X00;
+   427  0038  1283               	bcf	3,5	;RP0=0, select bank0
+   428  0039  1303               	bcf	3,6	;RP1=0, select bank0
+   429  003A  0187               	clrf	7	;volatile
+   430                           
+   431                           ;button.c: 44: PORTD=0X00;
+   432  003B  0188               	clrf	8	;volatile
+   433                           
+   434                           ;button.c: 45: _delay((unsigned long)((50)*(20000000/4000.0)));
+   435  003C  3002               	movlw	2
+   436  003D  00A5               	movwf	??_main+2
+   437  003E  3045               	movlw	69
+   438  003F  00A4               	movwf	??_main+1
+   439  0040  30A9               	movlw	169
+   440  0041  00A3               	movwf	??_main
+   441  0042                     u567:	
+   442  0042  0BA3               	decfsz	??_main,f
+   443  0043  2842               	goto	u567
+   444  0044  0BA4               	decfsz	??_main+1,f
+   445  0045  2842               	goto	u567
+   446  0046  0BA5               	decfsz	??_main+2,f
+   447  0047  2842               	goto	u567
+   448  0048  2849               	nop2
+   449                           
+   450                           ;button.c: 46: rb1();
+   451  0049  120A  118A  224F   	fcall	_rb1
+      +       120A  118A         
+   452                           
+   453                           ;button.c: 47: }
+   454  004E  28C1               	goto	l3129
+   455  004F                     l3143:	
+   456                           
+   457                           ;button.c: 49: {
+   458                           ;button.c: 50: PORTC=0X00;
+   459  004F  1283               	bcf	3,5	;RP0=0, select bank0
+   460  0050  1303               	bcf	3,6	;RP1=0, select bank0
+   461  0051  0187               	clrf	7	;volatile
+   462                           
+   463                           ;button.c: 51: PORTD=0X00;
+   464  0052  0188               	clrf	8	;volatile
+   465                           
+   466                           ;button.c: 52: _delay((unsigned long)((50)*(20000000/4000.0)));
+   467  0053  3002               	movlw	2
+   468  0054  00A5               	movwf	??_main+2
+   469  0055  3045               	movlw	69
+   470  0056  00A4               	movwf	??_main+1
+   471  0057  30A9               	movlw	169
+   472  0058  00A3               	movwf	??_main
+   473  0059                     u577:	
+   474  0059  0BA3               	decfsz	??_main,f
+   475  005A  2859               	goto	u577
+   476  005B  0BA4               	decfsz	??_main+1,f
+   477  005C  2859               	goto	u577
+   478  005D  0BA5               	decfsz	??_main+2,f
+   479  005E  2859               	goto	u577
+   480  005F  2860               	nop2
+   481                           
+   482                           ;button.c: 53: rb2();
+   483  0060  120A  118A  2343   	fcall	_rb2
+      +       120A  118A         
+   484                           
+   485                           ;button.c: 54: }
+   486  0065  28C1               	goto	l3129
+   487  0066                     l3149:	
+   488                           
+   489                           ;button.c: 56: {
+   490                           ;button.c: 57: PORTC=0X00;
+   491  0066  1283               	bcf	3,5	;RP0=0, select bank0
+   492  0067  1303               	bcf	3,6	;RP1=0, select bank0
+   493  0068  0187               	clrf	7	;volatile
+   494                           
+   495                           ;button.c: 58: PORTD=0X00;
+   496  0069  0188               	clrf	8	;volatile
+   497                           
+   498                           ;button.c: 59: _delay((unsigned long)((50)*(20000000/4000.0)));
+   499  006A  3002               	movlw	2
+   500  006B  00A5               	movwf	??_main+2
+   501  006C  3045               	movlw	69
+   502  006D  00A4               	movwf	??_main+1
+   503  006E  30A9               	movlw	169
+   504  006F  00A3               	movwf	??_main
+   505  0070                     u587:	
+   506  0070  0BA3               	decfsz	??_main,f
+   507  0071  2870               	goto	u587
+   508  0072  0BA4               	decfsz	??_main+1,f
+   509  0073  2870               	goto	u587
+   510  0074  0BA5               	decfsz	??_main+2,f
+   511  0075  2870               	goto	u587
+   512  0076  2877               	nop2
+   513                           
+   514                           ;button.c: 60: rb3();
+   515  0077  120A  118A  21F0   	fcall	_rb3
+      +       120A  118A         
+   516                           
+   517                           ;button.c: 61: }
+   518  007C  28C1               	goto	l3129
+   519  007D                     l3155:	
+   520                           
+   521                           ;button.c: 63: {
+   522                           ;button.c: 64: PORTC=0X00;
+   523  007D  1283               	bcf	3,5	;RP0=0, select bank0
+   524  007E  1303               	bcf	3,6	;RP1=0, select bank0
+   525  007F  0187               	clrf	7	;volatile
+   526                           
+   527                           ;button.c: 65: PORTD=0X00;
+   528  0080  0188               	clrf	8	;volatile
+   529                           
+   530                           ;button.c: 66: _delay((unsigned long)((50)*(20000000/4000.0)));
+   531  0081  3002               	movlw	2
+   532  0082  00A5               	movwf	??_main+2
+   533  0083  3045               	movlw	69
+   534  0084  00A4               	movwf	??_main+1
+   535  0085  30A9               	movlw	169
+   536  0086  00A3               	movwf	??_main
+   537  0087                     u597:	
+   538  0087  0BA3               	decfsz	??_main,f
+   539  0088  2887               	goto	u597
+   540  0089  0BA4               	decfsz	??_main+1,f
+   541  008A  2887               	goto	u597
+   542  008B  0BA5               	decfsz	??_main+2,f
+   543  008C  2887               	goto	u597
+   544  008D  288E               	nop2
+   545                           
+   546                           ;button.c: 67: rb4();
+   547  008E  120A  118A  2191   	fcall	_rb4
+      +       120A  118A         
+   548                           
+   549                           ;button.c: 68: }
+   550  0093  28C1               	goto	l3129
+   551  0094                     l3161:	
+   552                           
+   553                           ;button.c: 70: {
+   554                           ;button.c: 71: PORTC=0X00;
+   555  0094  1283               	bcf	3,5	;RP0=0, select bank0
+   556  0095  1303               	bcf	3,6	;RP1=0, select bank0
+   557  0096  0187               	clrf	7	;volatile
+   558                           
+   559                           ;button.c: 72: PORTD=0X00;
+   560  0097  0188               	clrf	8	;volatile
+   561                           
+   562                           ;button.c: 73: _delay((unsigned long)((50)*(20000000/4000.0)));
+   563  0098  3002               	movlw	2
+   564  0099  00A5               	movwf	??_main+2
+   565  009A  3045               	movlw	69
+   566  009B  00A4               	movwf	??_main+1
+   567  009C  30A9               	movlw	169
+   568  009D  00A3               	movwf	??_main
+   569  009E                     u607:	
+   570  009E  0BA3               	decfsz	??_main,f
+   571  009F  289E               	goto	u607
+   572  00A0  0BA4               	decfsz	??_main+1,f
+   573  00A1  289E               	goto	u607
+   574  00A2  0BA5               	decfsz	??_main+2,f
+   575  00A3  289E               	goto	u607
+   576  00A4  28A5               	nop2
+   577                           
+   578                           ;button.c: 74: rb5();
+   579  00A5  120A  118A  2317   	fcall	_rb5
+      +       120A  118A         
+   580                           
+   581                           ;button.c: 75: }
+   582  00AA  28C1               	goto	l3129
+   583  00AB                     l3167:	
+   584                           
+   585                           ;button.c: 77: {
+   586                           ;button.c: 78: PORTC=0X00;
+   587  00AB  1283               	bcf	3,5	;RP0=0, select bank0
+   588  00AC  1303               	bcf	3,6	;RP1=0, select bank0
+   589  00AD  0187               	clrf	7	;volatile
+   590                           
+   591                           ;button.c: 79: PORTD=0X00;
+   592  00AE  0188               	clrf	8	;volatile
+   593                           
+   594                           ;button.c: 80: _delay((unsigned long)((50)*(20000000/4000.0)));
+   595  00AF  3002               	movlw	2
+   596  00B0  00A5               	movwf	??_main+2
+   597  00B1  3045               	movlw	69
+   598  00B2  00A4               	movwf	??_main+1
+   599  00B3  30A9               	movlw	169
+   600  00B4  00A3               	movwf	??_main
+   601  00B5                     u617:	
+   602  00B5  0BA3               	decfsz	??_main,f
+   603  00B6  28B5               	goto	u617
+   604  00B7  0BA4               	decfsz	??_main+1,f
+   605  00B8  28B5               	goto	u617
+   606  00B9  0BA5               	decfsz	??_main+2,f
+   607  00BA  28B5               	goto	u617
+   608  00BB  28BC               	nop2
+   609                           
+   610                           ;button.c: 81: rb6();
+   611  00BC  120A  118A  22EB   	fcall	_rb6
+      +       120A  118A         
+   612  00C1                     l3129:	
+   613                           ;button.c: 82: }
+   614                           
+   615                           
+   616                           ;button.c: 33: {
+   617                           ;button.c: 34: if(fl_RB0==1)
+   618  00C1  1870               	btfsc	_fl_RB0/(0+8),_fl_RB0& (0+7)
+   619  00C2  2821               	goto	l3131
+   620                           
+   621                           ;button.c: 41: else if(fl_RB1==1)
+   622  00C3  18F0               	btfsc	_fl_RB1/(0+8),_fl_RB1& (0+7)
+   623  00C4  2838               	goto	l3137
+   624                           
+   625                           ;button.c: 48: else if(fl_RB2==1)
+   626  00C5  1970               	btfsc	_fl_RB2/(0+8),_fl_RB2& (0+7)
+   627  00C6  284F               	goto	l3143
+   628                           
+   629                           ;button.c: 55: else if(fl_RB3==1)
+   630  00C7  19F0               	btfsc	_fl_RB3/(0+8),_fl_RB3& (0+7)
+   631  00C8  2866               	goto	l3149
+   632                           
+   633                           ;button.c: 62: else if(fl_RB4==1)
+   634  00C9  1A70               	btfsc	_fl_RB4/(0+8),_fl_RB4& (0+7)
+   635  00CA  287D               	goto	l3155
+   636                           
+   637                           ;button.c: 69: else if(fl_RB5==1)
+   638  00CB  1AF0               	btfsc	_fl_RB5/(0+8),_fl_RB5& (0+7)
+   639  00CC  2894               	goto	l3161
+   640                           
+   641                           ;button.c: 76: else if(fl_RB6==1)
+   642  00CD  1B70               	btfsc	_fl_RB6/(0+8),_fl_RB6& (0+7)
+   643  00CE  28AB               	goto	l3167
+   644                           
+   645                           ;button.c: 83: else if(fl_RB7==1)
+   646  00CF  1FF0               	btfss	_fl_RB7/(0+8),_fl_RB7& (0+7)
+   647  00D0  28C1               	goto	l3129
+   648                           
+   649                           ;button.c: 84: {
+   650                           ;button.c: 85: PORTC=0X00;
+   651  00D1  1283               	bcf	3,5	;RP0=0, select bank0
+   652  00D2  1303               	bcf	3,6	;RP1=0, select bank0
+   653  00D3  0187               	clrf	7	;volatile
+   654                           
+   655                           ;button.c: 86: PORTD=0X00;
+   656  00D4  0188               	clrf	8	;volatile
+   657                           
+   658                           ;button.c: 87: _delay((unsigned long)((50)*(20000000/4000.0)));
+   659  00D5  3002               	movlw	2
+   660  00D6  00A5               	movwf	??_main+2
+   661  00D7  3045               	movlw	69
+   662  00D8  00A4               	movwf	??_main+1
+   663  00D9  30A9               	movlw	169
+   664  00DA  00A3               	movwf	??_main
+   665  00DB                     u627:	
+   666  00DB  0BA3               	decfsz	??_main,f
+   667  00DC  28DB               	goto	u627
+   668  00DD  0BA4               	decfsz	??_main+1,f
+   669  00DE  28DB               	goto	u627
+   670  00DF  0BA5               	decfsz	??_main+2,f
+   671  00E0  28DB               	goto	u627
+   672  00E1  28E2               	nop2
+   673                           
+   674                           ;button.c: 88: rb7();
+   675  00E2  120A  118A  236A   	fcall	_rb7
+      +       120A  118A         
+   676  00E7  28C1               	goto	l3129
+   677  00E8                     __end_of_main:	
+   678                           
+   679                           	psect	text359
+   680  036A                     __ptext359:	
+   681 ;; =============== function _main ends ============
+   682                           
+   683                           
+   684 ;; *************** function _rb7 *****************
+   685 ;; Defined at:
+   686 ;;		line 320 in file "C:\Online Class\HK6\Practice_Micro\button_16LED\button.c"
+   687 ;; Parameters:    Size  Location     Type
+   688 ;;		None
+   689 ;; Auto vars:     Size  Location     Type
+   690 ;;		None
+   691 ;; Return value:  Size  Location     Type
+   692 ;;		None               void
+   693 ;; Registers used:
+   694 ;;		wreg, status,2
+   695 ;; Tracked objects:
+   696 ;;		On entry : 0/0
+   697 ;;		On exit  : 60/0
+   698 ;;		Unchanged: 0/0
+   699 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   700 ;;      Params:         0       0       0       0       0
+   701 ;;      Locals:         0       0       0       0       0
+   702 ;;      Temps:          0       3       0       0       0
+   703 ;;      Totals:         0       3       0       0       0
+   704 ;;Total ram usage:        3 bytes
+   705 ;; Hardware stack levels used:    1
+   706 ;; Hardware stack levels required when called:    1
+   707 ;; This function calls:
+   708 ;;		Nothing
+   709 ;; This function is called by:
+   710 ;;		_main
+   711 ;; This function uses a non-reentrant model
+   712 ;;
+   713  036A                     _rb7:	
+   714                           
+   715                           ;button.c: 321: _delay((unsigned long)((200)*(20000000/4000.0)));
+   716                           
+   717                           ; Regs used in _rb7: [wreg+status,2]
+   718  036A  3006               	movlw	6
+   719  036B  1283               	bcf	3,5	;RP0=0, select bank0
+   720  036C  1303               	bcf	3,6	;RP1=0, select bank0
+   721  036D  00A2               	movwf	??_rb7+2
+   722  036E  3013               	movlw	19
+   723  036F  00A1               	movwf	??_rb7+1
+   724  0370  30B1               	movlw	177
+   725  0371  00A0               	movwf	??_rb7
+   726  0372                     u637:	
+   727  0372  0BA0               	decfsz	??_rb7,f
+   728  0373  2B72               	goto	u637
+   729  0374  0BA1               	decfsz	??_rb7+1,f
+   730  0375  2B72               	goto	u637
+   731  0376  0BA2               	decfsz	??_rb7+2,f
+   732  0377  2B72               	goto	u637
+   733  0378  2B79               	nop2
+   734                           
+   735                           ;button.c: 322: PORTC=0XFF;
+   736  0379  30FF               	movlw	255
+   737  037A  1283               	bcf	3,5	;RP0=0, select bank0
+   738  037B  1303               	bcf	3,6	;RP1=0, select bank0
+   739  037C  0087               	movwf	7	;volatile
+   740                           
+   741                           ;button.c: 323: PORTD=0XFF;
+   742  037D  0088               	movwf	8	;volatile
+   743                           
+   744                           ;button.c: 324: _delay((unsigned long)((200)*(20000000/4000.0)));
+   745  037E  3006               	movlw	6
+   746  037F  00A2               	movwf	??_rb7+2
+   747  0380  3013               	movlw	19
+   748  0381  00A1               	movwf	??_rb7+1
+   749  0382  30B1               	movlw	177
+   750  0383  00A0               	movwf	??_rb7
+   751  0384                     u647:	
+   752  0384  0BA0               	decfsz	??_rb7,f
+   753  0385  2B84               	goto	u647
+   754  0386  0BA1               	decfsz	??_rb7+1,f
+   755  0387  2B84               	goto	u647
+   756  0388  0BA2               	decfsz	??_rb7+2,f
+   757  0389  2B84               	goto	u647
+   758  038A  2B8B               	nop2
+   759                           
+   760                           ;button.c: 325: PORTC=0X00;
+   761  038B  1283               	bcf	3,5	;RP0=0, select bank0
+   762  038C  1303               	bcf	3,6	;RP1=0, select bank0
+   763  038D  0187               	clrf	7	;volatile
+   764                           
+   765                           ;button.c: 326: PORTD=0X00;
+   766  038E  0188               	clrf	8	;volatile
+   767  038F  0008               	return
+   768  0390                     __end_of_rb7:	
+   769                           
+   770                           	psect	text360
+   771  02EB                     __ptext360:	
+   772 ;; =============== function _rb7 ends ============
+   773                           
+   774                           
+   775 ;; *************** function _rb6 *****************
+   776 ;; Defined at:
+   777 ;;		line 307 in file "C:\Online Class\HK6\Practice_Micro\button_16LED\button.c"
+   778 ;; Parameters:    Size  Location     Type
+   779 ;;		None
+   780 ;; Auto vars:     Size  Location     Type
+   781 ;;		None
+   782 ;; Return value:  Size  Location     Type
+   783 ;;		None               void
+   784 ;; Registers used:
+   785 ;;		wreg, status,2, status,0, btemp+1
+   786 ;; Tracked objects:
+   787 ;;		On entry : 0/0
+   788 ;;		On exit  : 0/0
+   789 ;;		Unchanged: 0/0
+   790 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   791 ;;      Params:         0       0       0       0       0
+   792 ;;      Locals:         0       0       0       0       0
+   793 ;;      Temps:          0       3       0       0       0
+   794 ;;      Totals:         0       3       0       0       0
+   795 ;;Total ram usage:        3 bytes
+   796 ;; Hardware stack levels used:    1
+   797 ;; Hardware stack levels required when called:    1
+   798 ;; This function calls:
+   799 ;;		Nothing
+   800 ;; This function is called by:
+   801 ;;		_main
+   802 ;; This function uses a non-reentrant model
+   803 ;;
+   804  02EB                     _rb6:	
+   805                           
+   806                           ;button.c: 308: PORTC=0X01;
+   807                           
+   808                           ; Regs used in _rb6: [wreg+status,2+status,0+btemp+1]
+   809  02EB  3001               	movlw	1
+   810  02EC  1283               	bcf	3,5	;RP0=0, select bank0
+   811  02ED  1303               	bcf	3,6	;RP1=0, select bank0
+   812  02EE  0087               	movwf	7	;volatile
+   813                           
+   814                           ;button.c: 309: PORTD=0X80;
+   815  02EF  3080               	movlw	128
+   816  02F0  0088               	movwf	8	;volatile
+   817                           
+   818                           ;button.c: 310: for(i=0;i<8;i++)
+   819  02F1  01F6               	clrf	_i
+   820  02F2  01F7               	clrf	_i+1
+   821  02F3                     l3091:	
+   822  02F3  0877               	movf	_i+1,w
+   823  02F4  3A80               	xorlw	128
+   824  02F5  00FF               	movwf	127
+   825  02F6  3080               	movlw	128
+   826  02F7  027F               	subwf	127,w
+   827  02F8  1D03               	skipz
+   828  02F9  2AFC               	goto	u465
+   829  02FA  3008               	movlw	8
+   830  02FB  0276               	subwf	_i,w
+   831  02FC                     u465:	
+   832  02FC  1803               	btfsc	3,0
+   833  02FD  0008               	return
+   834                           
+   835                           ;button.c: 311: {
+   836                           ;button.c: 312: _delay((unsigned long)((200)*(20000000/4000.0)));
+   837  02FE  3006               	movlw	6
+   838  02FF  1283               	bcf	3,5	;RP0=0, select bank0
+   839  0300  1303               	bcf	3,6	;RP1=0, select bank0
+   840  0301  00A2               	movwf	??_rb6+2
+   841  0302  3013               	movlw	19
+   842  0303  00A1               	movwf	??_rb6+1
+   843  0304  30B1               	movlw	177
+   844  0305  00A0               	movwf	??_rb6
+   845  0306                     u657:	
+   846  0306  0BA0               	decfsz	??_rb6,f
+   847  0307  2B06               	goto	u657
+   848  0308  0BA1               	decfsz	??_rb6+1,f
+   849  0309  2B06               	goto	u657
+   850  030A  0BA2               	decfsz	??_rb6+2,f
+   851  030B  2B06               	goto	u657
+   852  030C  2B0D               	nop2
+   853                           
+   854                           ;button.c: 313: PORTC=PORTC<<1;
+   855  030D  1283               	bcf	3,5	;RP0=0, select bank0
+   856  030E  1303               	bcf	3,6	;RP1=0, select bank0
+   857  030F  1003               	clrc
+   858  0310  0D87               	rlf	7,f	;volatile
+   859                           
+   860                           ;button.c: 314: PORTD=PORTD>>1;
+   861  0311  1003               	clrc
+   862  0312  0C88               	rrf	8,f	;volatile
+   863  0313  0AF6               	incf	_i,f
+   864  0314  1903               	skipnz
+   865  0315  0AF7               	incf	_i+1,f
+   866  0316  2AF3               	goto	l3091
+   867  0317                     __end_of_rb6:	
+   868                           
+   869                           	psect	text361
+   870  0317                     __ptext361:	
+   871 ;; =============== function _rb6 ends ============
+   872                           
+   873                           
+   874 ;; *************** function _rb5 *****************
+   875 ;; Defined at:
+   876 ;;		line 294 in file "C:\Online Class\HK6\Practice_Micro\button_16LED\button.c"
+   877 ;; Parameters:    Size  Location     Type
+   878 ;;		None
+   879 ;; Auto vars:     Size  Location     Type
+   880 ;;		None
+   881 ;; Return value:  Size  Location     Type
+   882 ;;		None               void
+   883 ;; Registers used:
+   884 ;;		wreg, status,2, status,0, btemp+1
+   885 ;; Tracked objects:
+   886 ;;		On entry : 0/0
+   887 ;;		On exit  : 0/0
+   888 ;;		Unchanged: 0/0
+   889 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   890 ;;      Params:         0       0       0       0       0
+   891 ;;      Locals:         0       0       0       0       0
+   892 ;;      Temps:          0       3       0       0       0
+   893 ;;      Totals:         0       3       0       0       0
+   894 ;;Total ram usage:        3 bytes
+   895 ;; Hardware stack levels used:    1
+   896 ;; Hardware stack levels required when called:    1
+   897 ;; This function calls:
+   898 ;;		Nothing
+   899 ;; This function is called by:
+   900 ;;		_main
+   901 ;; This function uses a non-reentrant model
+   902 ;;
+   903  0317                     _rb5:	
+   904                           
+   905                           ;button.c: 295: PORTC=0X80;
+   906                           
+   907                           ; Regs used in _rb5: [wreg+status,2+status,0+btemp+1]
+   908  0317  3080               	movlw	128
+   909  0318  1283               	bcf	3,5	;RP0=0, select bank0
+   910  0319  1303               	bcf	3,6	;RP1=0, select bank0
+   911  031A  0087               	movwf	7	;volatile
+   912                           
+   913                           ;button.c: 296: PORTD=0X01;
+   914  031B  3001               	movlw	1
+   915  031C  0088               	movwf	8	;volatile
+   916                           
+   917                           ;button.c: 297: for(i=0;i<8;i++)
+   918  031D  01F6               	clrf	_i
+   919  031E  01F7               	clrf	_i+1
+   920  031F                     l3073:	
+   921  031F  0877               	movf	_i+1,w
+   922  0320  3A80               	xorlw	128
+   923  0321  00FF               	movwf	127
+   924  0322  3080               	movlw	128
+   925  0323  027F               	subwf	127,w
+   926  0324  1D03               	skipz
+   927  0325  2B28               	goto	u455
+   928  0326  3008               	movlw	8
+   929  0327  0276               	subwf	_i,w
+   930  0328                     u455:	
+   931  0328  1803               	btfsc	3,0
+   932  0329  0008               	return
+   933                           
+   934                           ;button.c: 298: {
+   935                           ;button.c: 299: _delay((unsigned long)((200)*(20000000/4000.0)));
+   936  032A  3006               	movlw	6
+   937  032B  1283               	bcf	3,5	;RP0=0, select bank0
+   938  032C  1303               	bcf	3,6	;RP1=0, select bank0
+   939  032D  00A2               	movwf	??_rb5+2
+   940  032E  3013               	movlw	19
+   941  032F  00A1               	movwf	??_rb5+1
+   942  0330  30B1               	movlw	177
+   943  0331  00A0               	movwf	??_rb5
+   944  0332                     u667:	
+   945  0332  0BA0               	decfsz	??_rb5,f
+   946  0333  2B32               	goto	u667
+   947  0334  0BA1               	decfsz	??_rb5+1,f
+   948  0335  2B32               	goto	u667
+   949  0336  0BA2               	decfsz	??_rb5+2,f
+   950  0337  2B32               	goto	u667
+   951  0338  2B39               	nop2
+   952                           
+   953                           ;button.c: 300: PORTC=PORTC>>1;
+   954  0339  1283               	bcf	3,5	;RP0=0, select bank0
+   955  033A  1303               	bcf	3,6	;RP1=0, select bank0
+   956  033B  1003               	clrc
+   957  033C  0C87               	rrf	7,f	;volatile
+   958                           
+   959                           ;button.c: 301: PORTD=PORTD<<1;
+   960  033D  1003               	clrc
+   961  033E  0D88               	rlf	8,f	;volatile
+   962  033F  0AF6               	incf	_i,f
+   963  0340  1903               	skipnz
+   964  0341  0AF7               	incf	_i+1,f
+   965  0342  2B1F               	goto	l3073
+   966  0343                     __end_of_rb5:	
+   967                           
+   968                           	psect	text362
+   969  0191                     __ptext362:	
+   970 ;; =============== function _rb5 ends ============
+   971                           
+   972                           
+   973 ;; *************** function _rb4 *****************
+   974 ;; Defined at:
+   975 ;;		line 272 in file "C:\Online Class\HK6\Practice_Micro\button_16LED\button.c"
+   976 ;; Parameters:    Size  Location     Type
+   977 ;;		None
+   978 ;; Auto vars:     Size  Location     Type
+   979 ;;		None
+   980 ;; Return value:  Size  Location     Type
+   981 ;;		None               void
+   982 ;; Registers used:
+   983 ;;		wreg, status,2, status,0, btemp+1
+   984 ;; Tracked objects:
+   985 ;;		On entry : 0/0
+   986 ;;		On exit  : 0/0
+   987 ;;		Unchanged: 0/0
+   988 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   989 ;;      Params:         0       0       0       0       0
+   990 ;;      Locals:         0       0       0       0       0
+   991 ;;      Temps:          0       3       0       0       0
+   992 ;;      Totals:         0       3       0       0       0
+   993 ;;Total ram usage:        3 bytes
+   994 ;; Hardware stack levels used:    1
+   995 ;; Hardware stack levels required when called:    1
+   996 ;; This function calls:
+   997 ;;		Nothing
+   998 ;; This function is called by:
+   999 ;;		_main
+  1000 ;; This function uses a non-reentrant model
+  1001 ;;
+  1002  0191                     _rb4:	
+  1003                           
+  1004                           ;button.c: 273: PORTD=0X80;
+  1005                           
+  1006                           ; Regs used in _rb4: [wreg+status,2+status,0+btemp+1]
+  1007  0191  3080               	movlw	128
+  1008  0192  21ED               	call	PL3	;select bank 0
+  1009  0193  0088               	movwf	8	;volatile
+  1010                           
+  1011                           ;button.c: 275: for(i=0;i<8;i++)
+  1012  0194  01F6               	clrf	_i
+  1013  0195  01F7               	clrf	_i+1
+  1014  0196                     l3039:	
+  1015  0196  0877               	movf	_i+1,w
+  1016  0197  3A80               	xorlw	128
+  1017  0198  00FF               	movwf	127
+  1018  0199  3080               	movlw	128
+  1019  019A  027F               	subwf	127,w
+  1020  019B  1D03               	skipz
+  1021  019C  299F               	goto	u435
+  1022  019D  3008               	movlw	8
+  1023  019E  0276               	subwf	_i,w
+  1024  019F                     u435:	
+  1025  019F  1803               	btfsc	3,0
+  1026  01A0  29B6               	goto	l3051
+  1027                           
+  1028                           ;button.c: 276: {
+  1029                           ;button.c: 277: _delay((unsigned long)((200)*(20000000/4000.0)));
+  1030  01A1  3006               	movlw	6
+  1031  01A2  21ED               	call	PL3	;select bank 0
+  1032  01A3  00A2               	movwf	??_rb4+2
+  1033  01A4  3013               	movlw	19
+  1034  01A5  00A1               	movwf	??_rb4+1
+  1035  01A6  30B1               	movlw	177
+  1036  01A7  00A0               	movwf	??_rb4
+  1037  01A8                     u677:	
+  1038  01A8  0BA0               	decfsz	??_rb4,f
+  1039  01A9  29A8               	goto	u677
+  1040  01AA  0BA1               	decfsz	??_rb4+1,f
+  1041  01AB  29A8               	goto	u677
+  1042  01AC  0BA2               	decfsz	??_rb4+2,f
+  1043  01AD  29A8               	goto	u677
+  1044  01AE  29AF               	nop2
+  1045                           
+  1046                           ;button.c: 278: PORTD=(PORTD>>1)+0x80;
+  1047  01AF  1403               	setc
+  1048  01B0  21ED               	call	PL3	;select bank 0
+  1049  01B1  0C88               	rrf	8,f	;volatile
+  1050  01B2  0AF6               	incf	_i,f
+  1051  01B3  1903               	skipnz
+  1052  01B4  0AF7               	incf	_i+1,f
+  1053  01B5  2996               	goto	l3039
+  1054  01B6                     l3051:	
+  1055                           
+  1056                           ;button.c: 280: }
+  1057                           ;button.c: 281: PORTC=0X80;
+  1058  01B6  3080               	movlw	128
+  1059  01B7  21ED               	call	PL3	;select bank 0
+  1060  01B8  0087               	movwf	7	;volatile
+  1061                           
+  1062                           ;button.c: 282: for(i=7;i<15;i++)
+  1063  01B9  3007               	movlw	7
+  1064  01BA  00F6               	movwf	_i
+  1065  01BB  01F7               	clrf	_i+1
+  1066  01BC                     l3053:	
+  1067  01BC  0877               	movf	_i+1,w
+  1068  01BD  3A80               	xorlw	128
+  1069  01BE  00FF               	movwf	127
+  1070  01BF  3080               	movlw	128
+  1071  01C0  027F               	subwf	127,w
+  1072  01C1  1D03               	skipz
+  1073  01C2  29C5               	goto	u445
+  1074  01C3  300F               	movlw	15
+  1075  01C4  0276               	subwf	_i,w
+  1076  01C5                     u445:	
+  1077  01C5  1803               	btfsc	3,0
+  1078  01C6  29DC               	goto	l3065
+  1079                           
+  1080                           ;button.c: 283: {
+  1081                           ;button.c: 284: _delay((unsigned long)((200)*(20000000/4000.0)));
+  1082  01C7  3006               	movlw	6
+  1083  01C8  21ED               	call	PL3	;select bank 0
+  1084  01C9  00A2               	movwf	??_rb4+2
+  1085  01CA  3013               	movlw	19
+  1086  01CB  00A1               	movwf	??_rb4+1
+  1087  01CC  30B1               	movlw	177
+  1088  01CD  00A0               	movwf	??_rb4
+  1089  01CE                     u687:	
+  1090  01CE  0BA0               	decfsz	??_rb4,f
+  1091  01CF  29CE               	goto	u687
+  1092  01D0  0BA1               	decfsz	??_rb4+1,f
+  1093  01D1  29CE               	goto	u687
+  1094  01D2  0BA2               	decfsz	??_rb4+2,f
+  1095  01D3  29CE               	goto	u687
+  1096  01D4  29D5               	nop2
+  1097                           
+  1098                           ;button.c: 285: PORTC=(PORTC>>1)+0x80;
+  1099  01D5  1403               	setc
+  1100  01D6  21ED               	call	PL3	;select bank 0
+  1101  01D7  0C87               	rrf	7,f	;volatile
+  1102  01D8  0AF6               	incf	_i,f
+  1103  01D9  1903               	skipnz
+  1104  01DA  0AF7               	incf	_i+1,f
+  1105  01DB  29BC               	goto	l3053
+  1106  01DC                     l3065:	
+  1107  01DC  21ED               	call	PL3	;select bank 0
+  1108                           
+  1109                           ;button.c: 287: }
+  1110                           ;button.c: 288: PORTC=0X00;
+  1111  01DD  0187               	clrf	7	;volatile
+  1112                           
+  1113                           ;button.c: 289: PORTD=0X00;
+  1114  01DE  0188               	clrf	8	;volatile
+  1115                           
+  1116                           ;button.c: 290: _delay((unsigned long)((200)*(20000000/4000.0)));
+  1117  01DF  3006               	movlw	6
+  1118  01E0  00A2               	movwf	??_rb4+2
+  1119  01E1  3013               	movlw	19
+  1120  01E2  00A1               	movwf	??_rb4+1
+  1121  01E3  30B1               	movlw	177
+  1122  01E4  00A0               	movwf	??_rb4
+  1123  01E5                     u697:	
+  1124  01E5  0BA0               	decfsz	??_rb4,f
+  1125  01E6  29E5               	goto	u697
+  1126  01E7  0BA1               	decfsz	??_rb4+1,f
+  1127  01E8  29E5               	goto	u697
+  1128  01E9  0BA2               	decfsz	??_rb4+2,f
+  1129  01EA  29E5               	goto	u697
+  1130  01EB  29EC               	nop2
+  1131  01EC  0008               	return
+  1132  01ED                     __end_of_rb4:	
+  1133  01ED                     PL3:	
+  1134  01ED  1283               	bcf	3,5	;RP0=0, select bank0
+  1135  01EE  1303               	bcf	3,6	;RP1=0, select bank0
+  1136  01EF  0008               	return
+  1137                           
+  1138                           	psect	text363
+  1139  01F0                     __ptext363:	
+  1140 ;; =============== function _rb4 ends ============
+  1141                           
+  1142                           
+  1143 ;; *************** function _rb3 *****************
+  1144 ;; Defined at:
+  1145 ;;		line 252 in file "C:\Online Class\HK6\Practice_Micro\button_16LED\button.c"
+  1146 ;; Parameters:    Size  Location     Type
+  1147 ;;		None
+  1148 ;; Auto vars:     Size  Location     Type
+  1149 ;;		None
+  1150 ;; Return value:  Size  Location     Type
+  1151 ;;		None               void
+  1152 ;; Registers used:
+  1153 ;;		wreg, status,2, status,0, btemp+1
+  1154 ;; Tracked objects:
+  1155 ;;		On entry : 0/0
+  1156 ;;		On exit  : 0/0
+  1157 ;;		Unchanged: 0/0
+  1158 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1159 ;;      Params:         0       0       0       0       0
+  1160 ;;      Locals:         0       0       0       0       0
+  1161 ;;      Temps:          0       3       0       0       0
+  1162 ;;      Totals:         0       3       0       0       0
+  1163 ;;Total ram usage:        3 bytes
+  1164 ;; Hardware stack levels used:    1
+  1165 ;; Hardware stack levels required when called:    1
+  1166 ;; This function calls:
+  1167 ;;		Nothing
+  1168 ;; This function is called by:
+  1169 ;;		_main
+  1170 ;; This function uses a non-reentrant model
+  1171 ;;
+  1172  01F0                     _rb3:	
+  1173                           
+  1174                           ;button.c: 253: PORTC=0X01;
+  1175                           
+  1176                           ; Regs used in _rb3: [wreg+status,2+status,0+btemp+1]
+  1177  01F0  3001               	movlw	1
+  1178  01F1  224C               	call	PL4	;select bank 0
+  1179  01F2  0087               	movwf	7	;volatile
+  1180                           
+  1181                           ;button.c: 254: for(i=0;i<8;i++)
+  1182  01F3  01F6               	clrf	_i
+  1183  01F4  01F7               	clrf	_i+1
+  1184  01F5                     l3005:	
+  1185  01F5  0877               	movf	_i+1,w
+  1186  01F6  3A80               	xorlw	128
+  1187  01F7  00FF               	movwf	127
+  1188  01F8  3080               	movlw	128
+  1189  01F9  027F               	subwf	127,w
+  1190  01FA  1D03               	skipz
+  1191  01FB  29FE               	goto	u415
+  1192  01FC  3008               	movlw	8
+  1193  01FD  0276               	subwf	_i,w
+  1194  01FE                     u415:	
+  1195  01FE  1803               	btfsc	3,0
+  1196  01FF  2A15               	goto	l3017
+  1197                           
+  1198                           ;button.c: 255: {
+  1199                           ;button.c: 256: _delay((unsigned long)((200)*(20000000/4000.0)));
+  1200  0200  3006               	movlw	6
+  1201  0201  224C               	call	PL4	;select bank 0
+  1202  0202  00A2               	movwf	??_rb3+2
+  1203  0203  3013               	movlw	19
+  1204  0204  00A1               	movwf	??_rb3+1
+  1205  0205  30B1               	movlw	177
+  1206  0206  00A0               	movwf	??_rb3
+  1207  0207                     u707:	
+  1208  0207  0BA0               	decfsz	??_rb3,f
+  1209  0208  2A07               	goto	u707
+  1210  0209  0BA1               	decfsz	??_rb3+1,f
+  1211  020A  2A07               	goto	u707
+  1212  020B  0BA2               	decfsz	??_rb3+2,f
+  1213  020C  2A07               	goto	u707
+  1214  020D  2A0E               	nop2
+  1215                           
+  1216                           ;button.c: 257: PORTC=(PORTC<<1)+0x01;
+  1217  020E  1403               	setc
+  1218  020F  224C               	call	PL4	;select bank 0
+  1219  0210  0D87               	rlf	7,f	;volatile
+  1220  0211  0AF6               	incf	_i,f
+  1221  0212  1903               	skipnz
+  1222  0213  0AF7               	incf	_i+1,f
+  1223  0214  29F5               	goto	l3005
+  1224  0215                     l3017:	
+  1225                           
+  1226                           ;button.c: 258: }
+  1227                           ;button.c: 260: PORTD=0X01;
+  1228  0215  3001               	movlw	1
+  1229  0216  224C               	call	PL4	;select bank 0
+  1230  0217  0088               	movwf	8	;volatile
+  1231                           
+  1232                           ;button.c: 261: for(i=7;i<15;i++)
+  1233  0218  3007               	movlw	7
+  1234  0219  00F6               	movwf	_i
+  1235  021A  01F7               	clrf	_i+1
+  1236  021B                     l3019:	
+  1237  021B  0877               	movf	_i+1,w
+  1238  021C  3A80               	xorlw	128
+  1239  021D  00FF               	movwf	127
+  1240  021E  3080               	movlw	128
+  1241  021F  027F               	subwf	127,w
+  1242  0220  1D03               	skipz
+  1243  0221  2A24               	goto	u425
+  1244  0222  300F               	movlw	15
+  1245  0223  0276               	subwf	_i,w
+  1246  0224                     u425:	
+  1247  0224  1803               	btfsc	3,0
+  1248  0225  2A3B               	goto	l3031
+  1249                           
+  1250                           ;button.c: 262: {
+  1251                           ;button.c: 263: _delay((unsigned long)((200)*(20000000/4000.0)));
+  1252  0226  3006               	movlw	6
+  1253  0227  224C               	call	PL4	;select bank 0
+  1254  0228  00A2               	movwf	??_rb3+2
+  1255  0229  3013               	movlw	19
+  1256  022A  00A1               	movwf	??_rb3+1
+  1257  022B  30B1               	movlw	177
+  1258  022C  00A0               	movwf	??_rb3
+  1259  022D                     u717:	
+  1260  022D  0BA0               	decfsz	??_rb3,f
+  1261  022E  2A2D               	goto	u717
+  1262  022F  0BA1               	decfsz	??_rb3+1,f
+  1263  0230  2A2D               	goto	u717
+  1264  0231  0BA2               	decfsz	??_rb3+2,f
+  1265  0232  2A2D               	goto	u717
+  1266  0233  2A34               	nop2
+  1267                           
+  1268                           ;button.c: 264: PORTD=(PORTD<<1)+0x01;
+  1269  0234  1403               	setc
+  1270  0235  224C               	call	PL4	;select bank 0
+  1271  0236  0D88               	rlf	8,f	;volatile
+  1272  0237  0AF6               	incf	_i,f
+  1273  0238  1903               	skipnz
+  1274  0239  0AF7               	incf	_i+1,f
+  1275  023A  2A1B               	goto	l3019
+  1276  023B                     l3031:	
+  1277  023B  224C               	call	PL4	;select bank 0
+  1278                           
+  1279                           ;button.c: 265: }
+  1280                           ;button.c: 266: PORTC=0X00;
+  1281  023C  0187               	clrf	7	;volatile
+  1282                           
+  1283                           ;button.c: 267: PORTD=0X00;
+  1284  023D  0188               	clrf	8	;volatile
+  1285                           
+  1286                           ;button.c: 268: _delay((unsigned long)((200)*(20000000/4000.0)));
+  1287  023E  3006               	movlw	6
+  1288  023F  00A2               	movwf	??_rb3+2
+  1289  0240  3013               	movlw	19
+  1290  0241  00A1               	movwf	??_rb3+1
+  1291  0242  30B1               	movlw	177
+  1292  0243  00A0               	movwf	??_rb3
+  1293  0244                     u727:	
+  1294  0244  0BA0               	decfsz	??_rb3,f
+  1295  0245  2A44               	goto	u727
+  1296  0246  0BA1               	decfsz	??_rb3+1,f
+  1297  0247  2A44               	goto	u727
+  1298  0248  0BA2               	decfsz	??_rb3+2,f
+  1299  0249  2A44               	goto	u727
+  1300  024A  2A4B               	nop2
+  1301  024B  0008               	return
+  1302  024C                     __end_of_rb3:	
+  1303  024C                     PL4:	
+  1304  024C  1283               	bcf	3,5	;RP0=0, select bank0
+  1305  024D  1303               	bcf	3,6	;RP1=0, select bank0
+  1306  024E  0008               	return
+  1307                           
+  1308                           	psect	text364
+  1309  0343                     __ptext364:	
+  1310 ;; =============== function _rb3 ends ============
+  1311                           
+  1312                           
+  1313 ;; *************** function _rb2 *****************
+  1314 ;; Defined at:
+  1315 ;;		line 242 in file "C:\Online Class\HK6\Practice_Micro\button_16LED\button.c"
+  1316 ;; Parameters:    Size  Location     Type
+  1317 ;;		None
+  1318 ;; Auto vars:     Size  Location     Type
+  1319 ;;		None
+  1320 ;; Return value:  Size  Location     Type
+  1321 ;;		None               void
+  1322 ;; Registers used:
+  1323 ;;		wreg
+  1324 ;; Tracked objects:
+  1325 ;;		On entry : 0/0
+  1326 ;;		On exit  : 60/0
+  1327 ;;		Unchanged: 0/0
+  1328 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1329 ;;      Params:         0       0       0       0       0
+  1330 ;;      Locals:         0       0       0       0       0
+  1331 ;;      Temps:          0       3       0       0       0
+  1332 ;;      Totals:         0       3       0       0       0
+  1333 ;;Total ram usage:        3 bytes
+  1334 ;; Hardware stack levels used:    1
+  1335 ;; Hardware stack levels required when called:    1
+  1336 ;; This function calls:
+  1337 ;;		Nothing
+  1338 ;; This function is called by:
+  1339 ;;		_main
+  1340 ;; This function uses a non-reentrant model
+  1341 ;;
+  1342  0343                     _rb2:	
+  1343                           
+  1344                           ;button.c: 243: _delay((unsigned long)((200)*(20000000/4000.0)));
+  1345                           
+  1346                           ; Regs used in _rb2: [wreg]
+  1347  0343  3006               	movlw	6
+  1348  0344  1283               	bcf	3,5	;RP0=0, select bank0
+  1349  0345  1303               	bcf	3,6	;RP1=0, select bank0
+  1350  0346  00A2               	movwf	??_rb2+2
+  1351  0347  3013               	movlw	19
+  1352  0348  00A1               	movwf	??_rb2+1
+  1353  0349  30B1               	movlw	177
+  1354  034A  00A0               	movwf	??_rb2
+  1355  034B                     u737:	
+  1356  034B  0BA0               	decfsz	??_rb2,f
+  1357  034C  2B4B               	goto	u737
+  1358  034D  0BA1               	decfsz	??_rb2+1,f
+  1359  034E  2B4B               	goto	u737
+  1360  034F  0BA2               	decfsz	??_rb2+2,f
+  1361  0350  2B4B               	goto	u737
+  1362  0351  2B52               	nop2
+  1363                           
+  1364                           ;button.c: 244: PORTC=0xAA;
+  1365  0352  30AA               	movlw	170
+  1366  0353  1283               	bcf	3,5	;RP0=0, select bank0
+  1367  0354  1303               	bcf	3,6	;RP1=0, select bank0
+  1368  0355  0087               	movwf	7	;volatile
+  1369                           
+  1370                           ;button.c: 245: PORTD=0XAA;
+  1371  0356  0088               	movwf	8	;volatile
+  1372                           
+  1373                           ;button.c: 246: _delay((unsigned long)((200)*(20000000/4000.0)));
+  1374  0357  3006               	movlw	6
+  1375  0358  00A2               	movwf	??_rb2+2
+  1376  0359  3013               	movlw	19
+  1377  035A  00A1               	movwf	??_rb2+1
+  1378  035B  30B1               	movlw	177
+  1379  035C  00A0               	movwf	??_rb2
+  1380  035D                     u747:	
+  1381  035D  0BA0               	decfsz	??_rb2,f
+  1382  035E  2B5D               	goto	u747
+  1383  035F  0BA1               	decfsz	??_rb2+1,f
+  1384  0360  2B5D               	goto	u747
+  1385  0361  0BA2               	decfsz	??_rb2+2,f
+  1386  0362  2B5D               	goto	u747
+  1387  0363  2B64               	nop2
+  1388                           
+  1389                           ;button.c: 247: PORTC=0X55;
+  1390  0364  3055               	movlw	85
+  1391  0365  1283               	bcf	3,5	;RP0=0, select bank0
+  1392  0366  1303               	bcf	3,6	;RP1=0, select bank0
+  1393  0367  0087               	movwf	7	;volatile
+  1394                           
+  1395                           ;button.c: 248: PORTD=0X55;
+  1396  0368  0088               	movwf	8	;volatile
+  1397  0369  0008               	return
+  1398  036A                     __end_of_rb2:	
+  1399                           
+  1400                           	psect	text365
+  1401  024F                     __ptext365:	
+  1402 ;; =============== function _rb2 ends ============
+  1403                           
+  1404                           
+  1405 ;; *************** function _rb1 *****************
+  1406 ;; Defined at:
+  1407 ;;		line 224 in file "C:\Online Class\HK6\Practice_Micro\button_16LED\button.c"
+  1408 ;; Parameters:    Size  Location     Type
+  1409 ;;		None
+  1410 ;; Auto vars:     Size  Location     Type
+  1411 ;;		None
+  1412 ;; Return value:  Size  Location     Type
+  1413 ;;		None               void
+  1414 ;; Registers used:
+  1415 ;;		wreg, status,2, status,0, btemp+1
+  1416 ;; Tracked objects:
+  1417 ;;		On entry : 0/0
+  1418 ;;		On exit  : 0/0
+  1419 ;;		Unchanged: 0/0
+  1420 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1421 ;;      Params:         0       0       0       0       0
+  1422 ;;      Locals:         0       0       0       0       0
+  1423 ;;      Temps:          0       3       0       0       0
+  1424 ;;      Totals:         0       3       0       0       0
+  1425 ;;Total ram usage:        3 bytes
+  1426 ;; Hardware stack levels used:    1
+  1427 ;; Hardware stack levels required when called:    1
+  1428 ;; This function calls:
+  1429 ;;		Nothing
+  1430 ;; This function is called by:
+  1431 ;;		_main
+  1432 ;; This function uses a non-reentrant model
+  1433 ;;
+  1434  024F                     _rb1:	
+  1435                           
+  1436                           ;button.c: 225: PORTC=0X01;
+  1437                           
+  1438                           ; Regs used in _rb1: [wreg+status,2+status,0+btemp+1]
+  1439  024F  3001               	movlw	1
+  1440  0250  229A               	call	PL5	;select bank 0
+  1441  0251  0087               	movwf	7	;volatile
+  1442                           
+  1443                           ;button.c: 226: for(i=0;i<8;i++)
+  1444  0252  01F6               	clrf	_i
+  1445  0253  01F7               	clrf	_i+1
+  1446  0254                     l2973:	
+  1447  0254  0877               	movf	_i+1,w
+  1448  0255  3A80               	xorlw	128
+  1449  0256  00FF               	movwf	127
+  1450  0257  3080               	movlw	128
+  1451  0258  027F               	subwf	127,w
+  1452  0259  1D03               	skipz
+  1453  025A  2A5D               	goto	u395
+  1454  025B  3008               	movlw	8
+  1455  025C  0276               	subwf	_i,w
+  1456  025D                     u395:	
+  1457  025D  1803               	btfsc	3,0
+  1458  025E  2A74               	goto	l2985
+  1459                           
+  1460                           ;button.c: 227: {
+  1461                           ;button.c: 228: _delay((unsigned long)((200)*(20000000/4000.0)));
+  1462  025F  3006               	movlw	6
+  1463  0260  229A               	call	PL5	;select bank 0
+  1464  0261  00A2               	movwf	??_rb1+2
+  1465  0262  3013               	movlw	19
+  1466  0263  00A1               	movwf	??_rb1+1
+  1467  0264  30B1               	movlw	177
+  1468  0265  00A0               	movwf	??_rb1
+  1469  0266                     u757:	
+  1470  0266  0BA0               	decfsz	??_rb1,f
+  1471  0267  2A66               	goto	u757
+  1472  0268  0BA1               	decfsz	??_rb1+1,f
+  1473  0269  2A66               	goto	u757
+  1474  026A  0BA2               	decfsz	??_rb1+2,f
+  1475  026B  2A66               	goto	u757
+  1476  026C  2A6D               	nop2
+  1477  026D  229A               	call	PL5	;select bank 0
+  1478                           
+  1479                           ;button.c: 229: PORTC=PORTC<<1;
+  1480  026E  1003               	clrc
+  1481  026F  0D87               	rlf	7,f	;volatile
+  1482  0270  0AF6               	incf	_i,f
+  1483  0271  1903               	skipnz
+  1484  0272  0AF7               	incf	_i+1,f
+  1485  0273  2A54               	goto	l2973
+  1486  0274                     l2985:	
+  1487                           
+  1488                           ;button.c: 230: }
+  1489                           ;button.c: 232: PORTD=0X01;
+  1490  0274  3001               	movlw	1
+  1491  0275  229A               	call	PL5	;select bank 0
+  1492  0276  0088               	movwf	8	;volatile
+  1493                           
+  1494                           ;button.c: 233: for(i=7;i<15;i++)
+  1495  0277  3007               	movlw	7
+  1496  0278  00F6               	movwf	_i
+  1497  0279  01F7               	clrf	_i+1
+  1498  027A                     l2987:	
+  1499  027A  0877               	movf	_i+1,w
+  1500  027B  3A80               	xorlw	128
+  1501  027C  00FF               	movwf	127
+  1502  027D  3080               	movlw	128
+  1503  027E  027F               	subwf	127,w
+  1504  027F  1D03               	skipz
+  1505  0280  2A83               	goto	u405
+  1506  0281  300F               	movlw	15
+  1507  0282  0276               	subwf	_i,w
+  1508  0283                     u405:	
+  1509  0283  1803               	btfsc	3,0
+  1510  0284  0008               	return
+  1511                           
+  1512                           ;button.c: 234: {
+  1513                           ;button.c: 235: _delay((unsigned long)((200)*(20000000/4000.0)));
+  1514  0285  3006               	movlw	6
+  1515  0286  229A               	call	PL5	;select bank 0
+  1516  0287  00A2               	movwf	??_rb1+2
+  1517  0288  3013               	movlw	19
+  1518  0289  00A1               	movwf	??_rb1+1
+  1519  028A  30B1               	movlw	177
+  1520  028B  00A0               	movwf	??_rb1
+  1521  028C                     u767:	
+  1522  028C  0BA0               	decfsz	??_rb1,f
+  1523  028D  2A8C               	goto	u767
+  1524  028E  0BA1               	decfsz	??_rb1+1,f
+  1525  028F  2A8C               	goto	u767
+  1526  0290  0BA2               	decfsz	??_rb1+2,f
+  1527  0291  2A8C               	goto	u767
+  1528  0292  2A93               	nop2
+  1529  0293  229A               	call	PL5	;select bank 0
+  1530                           
+  1531                           ;button.c: 236: PORTD=PORTD<<1;
+  1532  0294  1003               	clrc
+  1533  0295  0D88               	rlf	8,f	;volatile
+  1534  0296  0AF6               	incf	_i,f
+  1535  0297  1903               	skipnz
+  1536  0298  0AF7               	incf	_i+1,f
+  1537  0299  2A7A               	goto	l2987
+  1538  029A                     __end_of_rb1:	
+  1539  029A                     PL5:	
+  1540  029A  1283               	bcf	3,5	;RP0=0, select bank0
+  1541  029B  1303               	bcf	3,6	;RP1=0, select bank0
+  1542  029C  0008               	return
+  1543                           
+  1544                           	psect	text366
+  1545  029D                     __ptext366:	
+  1546 ;; =============== function _rb1 ends ============
+  1547                           
+  1548                           
+  1549 ;; *************** function _rb0 *****************
+  1550 ;; Defined at:
+  1551 ;;		line 205 in file "C:\Online Class\HK6\Practice_Micro\button_16LED\button.c"
+  1552 ;; Parameters:    Size  Location     Type
+  1553 ;;		None
+  1554 ;; Auto vars:     Size  Location     Type
+  1555 ;;		None
+  1556 ;; Return value:  Size  Location     Type
+  1557 ;;		None               void
+  1558 ;; Registers used:
+  1559 ;;		wreg, status,2, status,0, btemp+1
+  1560 ;; Tracked objects:
+  1561 ;;		On entry : 0/0
+  1562 ;;		On exit  : 0/0
+  1563 ;;		Unchanged: 0/0
+  1564 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1565 ;;      Params:         0       0       0       0       0
+  1566 ;;      Locals:         0       0       0       0       0
+  1567 ;;      Temps:          0       3       0       0       0
+  1568 ;;      Totals:         0       3       0       0       0
+  1569 ;;Total ram usage:        3 bytes
+  1570 ;; Hardware stack levels used:    1
+  1571 ;; Hardware stack levels required when called:    1
+  1572 ;; This function calls:
+  1573 ;;		Nothing
+  1574 ;; This function is called by:
+  1575 ;;		_main
+  1576 ;; This function uses a non-reentrant model
+  1577 ;;
+  1578  029D                     _rb0:	
+  1579                           
+  1580                           ;button.c: 206: PORTD=0X80;
+  1581                           
+  1582                           ; Regs used in _rb0: [wreg+status,2+status,0+btemp+1]
+  1583  029D  3080               	movlw	128
+  1584  029E  22E8               	call	PL6	;select bank 0
+  1585  029F  0088               	movwf	8	;volatile
+  1586                           
+  1587                           ;button.c: 208: for(i=0;i<8;i++)
+  1588  02A0  01F6               	clrf	_i
+  1589  02A1  01F7               	clrf	_i+1
+  1590  02A2                     l2943:	
+  1591  02A2  0877               	movf	_i+1,w
+  1592  02A3  3A80               	xorlw	128
+  1593  02A4  00FF               	movwf	127
+  1594  02A5  3080               	movlw	128
+  1595  02A6  027F               	subwf	127,w
+  1596  02A7  1D03               	skipz
+  1597  02A8  2AAB               	goto	u375
+  1598  02A9  3008               	movlw	8
+  1599  02AA  0276               	subwf	_i,w
+  1600  02AB                     u375:	
+  1601  02AB  1803               	btfsc	3,0
+  1602  02AC  2AC2               	goto	l2955
+  1603                           
+  1604                           ;button.c: 209: {
+  1605                           ;button.c: 210: _delay((unsigned long)((200)*(20000000/4000.0)));
+  1606  02AD  3006               	movlw	6
+  1607  02AE  22E8               	call	PL6	;select bank 0
+  1608  02AF  00A2               	movwf	??_rb0+2
+  1609  02B0  3013               	movlw	19
+  1610  02B1  00A1               	movwf	??_rb0+1
+  1611  02B2  30B1               	movlw	177
+  1612  02B3  00A0               	movwf	??_rb0
+  1613  02B4                     u777:	
+  1614  02B4  0BA0               	decfsz	??_rb0,f
+  1615  02B5  2AB4               	goto	u777
+  1616  02B6  0BA1               	decfsz	??_rb0+1,f
+  1617  02B7  2AB4               	goto	u777
+  1618  02B8  0BA2               	decfsz	??_rb0+2,f
+  1619  02B9  2AB4               	goto	u777
+  1620  02BA  2ABB               	nop2
+  1621  02BB  22E8               	call	PL6	;select bank 0
+  1622                           
+  1623                           ;button.c: 211: PORTD=PORTD>>1;
+  1624  02BC  1003               	clrc
+  1625  02BD  0C88               	rrf	8,f	;volatile
+  1626  02BE  0AF6               	incf	_i,f
+  1627  02BF  1903               	skipnz
+  1628  02C0  0AF7               	incf	_i+1,f
+  1629  02C1  2AA2               	goto	l2943
+  1630  02C2                     l2955:	
+  1631                           
+  1632                           ;button.c: 213: }
+  1633                           ;button.c: 214: PORTC=0X80;
+  1634  02C2  3080               	movlw	128
+  1635  02C3  22E8               	call	PL6	;select bank 0
+  1636  02C4  0087               	movwf	7	;volatile
+  1637                           
+  1638                           ;button.c: 215: for(i=7;i<15;i++)
+  1639  02C5  3007               	movlw	7
+  1640  02C6  00F6               	movwf	_i
+  1641  02C7  01F7               	clrf	_i+1
+  1642  02C8                     l2957:	
+  1643  02C8  0877               	movf	_i+1,w
+  1644  02C9  3A80               	xorlw	128
+  1645  02CA  00FF               	movwf	127
+  1646  02CB  3080               	movlw	128
+  1647  02CC  027F               	subwf	127,w
+  1648  02CD  1D03               	skipz
+  1649  02CE  2AD1               	goto	u385
+  1650  02CF  300F               	movlw	15
+  1651  02D0  0276               	subwf	_i,w
+  1652  02D1                     u385:	
+  1653  02D1  1803               	btfsc	3,0
+  1654  02D2  0008               	return
+  1655                           
+  1656                           ;button.c: 216: {
+  1657                           ;button.c: 217: _delay((unsigned long)((200)*(20000000/4000.0)));
+  1658  02D3  3006               	movlw	6
+  1659  02D4  22E8               	call	PL6	;select bank 0
+  1660  02D5  00A2               	movwf	??_rb0+2
+  1661  02D6  3013               	movlw	19
+  1662  02D7  00A1               	movwf	??_rb0+1
+  1663  02D8  30B1               	movlw	177
+  1664  02D9  00A0               	movwf	??_rb0
+  1665  02DA                     u787:	
+  1666  02DA  0BA0               	decfsz	??_rb0,f
+  1667  02DB  2ADA               	goto	u787
+  1668  02DC  0BA1               	decfsz	??_rb0+1,f
+  1669  02DD  2ADA               	goto	u787
+  1670  02DE  0BA2               	decfsz	??_rb0+2,f
+  1671  02DF  2ADA               	goto	u787
+  1672  02E0  2AE1               	nop2
+  1673  02E1  22E8               	call	PL6	;select bank 0
+  1674                           
+  1675                           ;button.c: 218: PORTC=PORTC>>1;
+  1676  02E2  1003               	clrc
+  1677  02E3  0C87               	rrf	7,f	;volatile
+  1678  02E4  0AF6               	incf	_i,f
+  1679  02E5  1903               	skipnz
+  1680  02E6  0AF7               	incf	_i+1,f
+  1681  02E7  2AC8               	goto	l2957
+  1682  02E8                     __end_of_rb0:	
+  1683  02E8                     PL6:	
+  1684  02E8  1283               	bcf	3,5	;RP0=0, select bank0
+  1685  02E9  1303               	bcf	3,6	;RP1=0, select bank0
+  1686  02EA  0008               	return
+  1687                           
+  1688                           	psect	text367
+  1689  00E8                     __ptext367:	
+  1690 ;; =============== function _rb0 ends ============
+  1691                           
+  1692                           
+  1693 ;; *************** function _ngat *****************
+  1694 ;; Defined at:
+  1695 ;;		line 94 in file "C:\Online Class\HK6\Practice_Micro\button_16LED\button.c"
+  1696 ;; Parameters:    Size  Location     Type
+  1697 ;;		None
+  1698 ;; Auto vars:     Size  Location     Type
+  1699 ;;		None
+  1700 ;; Return value:  Size  Location     Type
+  1701 ;;		None               void
+  1702 ;; Registers used:
+  1703 ;;		wreg
+  1704 ;; Tracked objects:
+  1705 ;;		On entry : 0/0
+  1706 ;;		On exit  : 0/0
+  1707 ;;		Unchanged: 0/0
+  1708 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1709 ;;      Params:         0       0       0       0       0
+  1710 ;;      Locals:         0       0       0       0       0
+  1711 ;;      Temps:          5       0       0       0       0
+  1712 ;;      Totals:         5       0       0       0       0
+  1713 ;;Total ram usage:        5 bytes
+  1714 ;; Hardware stack levels used:    1
+  1715 ;; This function calls:
+  1716 ;;		Nothing
+  1717 ;; This function is called by:
+  1718 ;;		Interrupt level 1
+  1719 ;; This function uses a non-reentrant model
+  1720 ;;
+  1721  00E8                     _ngat:	
+  1722                           
+  1723                           ;button.c: 95: if(RBIF && RBIE)
+  1724  00E8  180B               	btfsc	11,0
+  1725  00E9  1D8B               	btfss	11,3
+  1726  00EA  2982               	goto	i1l2629
+  1727                           
+  1728                           ;button.c: 96: {
+  1729                           ;button.c: 97: if(RB0)
+  1730  00EB  1283               	bcf	3,5	;RP0=0, select bank0
+  1731  00EC  1303               	bcf	3,6	;RP1=0, select bank0
+  1732  00ED  1C06               	btfss	6,0
+  1733  00EE  28F2               	goto	i1l1083
+  1734                           
+  1735                           ;button.c: 98: {
+  1736                           ;button.c: 99: fl_RB0=1;
+  1737  00EF  1470               	bsf	_fl_RB0/(0+8),_fl_RB0& (0+7)
+  1738                           
+  1739                           ;button.c: 100: fl_RB1=0;
+  1740  00F0  10F0               	bcf	_fl_RB1/(0+8),_fl_RB1& (0+7)
+  1741  00F1  2903               	goto	L1
+  1742  00F2                     i1l1083:	
+  1743                           ;button.c: 108: }
+  1744                           
+  1745                           ;button.c: 106: fl_RB7=0;
+  1746                           
+  1747                           ;button.c: 105: fl_RB6=0;
+  1748                           
+  1749                           ;button.c: 104: fl_RB5=0;
+  1750                           
+  1751                           ;button.c: 103: fl_RB4=0;
+  1752                           
+  1753                           ;button.c: 102: fl_RB3=0;
+  1754                           
+  1755                           ;button.c: 101: fl_RB2=0;
+  1756                           
+  1757                           
+  1758                           ;button.c: 109: else if (RB1)
+  1759  00F2  1C86               	btfss	6,1
+  1760  00F3  290A               	goto	i1l1085
+  1761                           
+  1762                           ;button.c: 110: {
+  1763                           ;button.c: 111: _delay((unsigned long)((100)*(20000000/4000.0)));
+  1764  00F4  3003               	movlw	3
+  1765  00F5  00F3               	movwf	??_ngat+2
+  1766  00F6  308A               	movlw	138
+  1767  00F7  00F2               	movwf	??_ngat+1
+  1768  00F8  3056               	movlw	86
+  1769  00F9  00F1               	movwf	??_ngat
+  1770  00FA                     u79_27:	
+  1771  00FA  0BF1               	decfsz	??_ngat,f
+  1772  00FB  28FA               	goto	u79_27
+  1773  00FC  0BF2               	decfsz	??_ngat+1,f
+  1774  00FD  28FA               	goto	u79_27
+  1775  00FE  0BF3               	decfsz	??_ngat+2,f
+  1776  00FF  28FA               	goto	u79_27
+  1777  0100  2901               	nop2
+  1778                           
+  1779                           ;button.c: 112: fl_RB0=0;
+  1780  0101  1070               	bcf	_fl_RB0/(0+8),_fl_RB0& (0+7)
+  1781                           
+  1782                           ;button.c: 113: fl_RB1=1;
+  1783  0102  14F0               	bsf	_fl_RB1/(0+8),_fl_RB1& (0+7)
+  1784  0103                     L1:	
+  1785                           
+  1786                           ;button.c: 114: fl_RB2=0;
+  1787  0103  1170               	bcf	_fl_RB2/(0+8),_fl_RB2& (0+7)
+  1788  0104                     i1l2511:	
+  1789                           
+  1790                           ;button.c: 115: fl_RB3=0;
+  1791  0104  11F0               	bcf	_fl_RB3/(0+8),_fl_RB3& (0+7)
+  1792  0105                     i1l2513:	
+  1793                           
+  1794                           ;button.c: 116: fl_RB4=0;
+  1795  0105  1270               	bcf	_fl_RB4/(0+8),_fl_RB4& (0+7)
+  1796  0106                     i1l2515:	
+  1797                           
+  1798                           ;button.c: 117: fl_RB5=0;
+  1799  0106  12F0               	bcf	_fl_RB5/(0+8),_fl_RB5& (0+7)
+  1800  0107                     i1l2517:	
+  1801                           
+  1802                           ;button.c: 118: fl_RB6=0;
+  1803  0107  1370               	bcf	_fl_RB6/(0+8),_fl_RB6& (0+7)
+  1804  0108                     i1l2519:	
+  1805                           
+  1806                           ;button.c: 119: fl_RB7=0;
+  1807  0108  13F0               	bcf	_fl_RB7/(0+8),_fl_RB7& (0+7)
+  1808                           
+  1809                           ;button.c: 121: }
+  1810  0109  2982               	goto	i1l2629
+  1811  010A                     i1l1085:	
+  1812                           
+  1813                           ;button.c: 122: else if (RB2)
+  1814  010A  1D06               	btfss	6,2
+  1815  010B  291D               	goto	i1l1087
+  1816                           
+  1817                           ;button.c: 123: {
+  1818                           ;button.c: 124: _delay((unsigned long)((100)*(20000000/4000.0)));
+  1819  010C  3003               	movlw	3
+  1820  010D  00F3               	movwf	??_ngat+2
+  1821  010E  308A               	movlw	138
+  1822  010F  00F2               	movwf	??_ngat+1
+  1823  0110  3056               	movlw	86
+  1824  0111  00F1               	movwf	??_ngat
+  1825  0112                     u80_27:	
+  1826  0112  0BF1               	decfsz	??_ngat,f
+  1827  0113  2912               	goto	u80_27
+  1828  0114  0BF2               	decfsz	??_ngat+1,f
+  1829  0115  2912               	goto	u80_27
+  1830  0116  0BF3               	decfsz	??_ngat+2,f
+  1831  0117  2912               	goto	u80_27
+  1832  0118  2919               	nop2
+  1833                           
+  1834                           ;button.c: 125: fl_RB0=0;
+  1835  0119  1070               	bcf	_fl_RB0/(0+8),_fl_RB0& (0+7)
+  1836                           
+  1837                           ;button.c: 126: fl_RB1=0;
+  1838  011A  10F0               	bcf	_fl_RB1/(0+8),_fl_RB1& (0+7)
+  1839                           
+  1840                           ;button.c: 127: fl_RB2=1;
+  1841  011B  1570               	bsf	_fl_RB2/(0+8),_fl_RB2& (0+7)
+  1842  011C  2904               	goto	i1l2511
+  1843  011D                     i1l1087:	
+  1844                           
+  1845                           ;button.c: 135: else if (RB3)
+  1846  011D  1D86               	btfss	6,3
+  1847  011E  2931               	goto	i1l1089
+  1848                           
+  1849                           ;button.c: 136: {
+  1850                           ;button.c: 137: _delay((unsigned long)((100)*(20000000/4000.0)));
+  1851  011F  3003               	movlw	3
+  1852  0120  00F3               	movwf	??_ngat+2
+  1853  0121  308A               	movlw	138
+  1854  0122  00F2               	movwf	??_ngat+1
+  1855  0123  3056               	movlw	86
+  1856  0124  00F1               	movwf	??_ngat
+  1857  0125                     u81_27:	
+  1858  0125  0BF1               	decfsz	??_ngat,f
+  1859  0126  2925               	goto	u81_27
+  1860  0127  0BF2               	decfsz	??_ngat+1,f
+  1861  0128  2925               	goto	u81_27
+  1862  0129  0BF3               	decfsz	??_ngat+2,f
+  1863  012A  2925               	goto	u81_27
+  1864  012B  292C               	nop2
+  1865                           
+  1866                           ;button.c: 138: fl_RB0=0;
+  1867  012C  1070               	bcf	_fl_RB0/(0+8),_fl_RB0& (0+7)
+  1868                           
+  1869                           ;button.c: 139: fl_RB1=0;
+  1870  012D  10F0               	bcf	_fl_RB1/(0+8),_fl_RB1& (0+7)
+  1871                           
+  1872                           ;button.c: 140: fl_RB2=0;
+  1873  012E  1170               	bcf	_fl_RB2/(0+8),_fl_RB2& (0+7)
+  1874                           
+  1875                           ;button.c: 141: fl_RB3=1;
+  1876  012F  15F0               	bsf	_fl_RB3/(0+8),_fl_RB3& (0+7)
+  1877  0130  2905               	goto	i1l2513
+  1878  0131                     i1l1089:	
+  1879                           
+  1880                           ;button.c: 148: else if (RB4)
+  1881  0131  1E06               	btfss	6,4
+  1882  0132  2946               	goto	i1l1091
+  1883                           
+  1884                           ;button.c: 149: {
+  1885                           ;button.c: 150: _delay((unsigned long)((100)*(20000000/4000.0)));
+  1886  0133  3003               	movlw	3
+  1887  0134  00F3               	movwf	??_ngat+2
+  1888  0135  308A               	movlw	138
+  1889  0136  00F2               	movwf	??_ngat+1
+  1890  0137  3056               	movlw	86
+  1891  0138  00F1               	movwf	??_ngat
+  1892  0139                     u82_27:	
+  1893  0139  0BF1               	decfsz	??_ngat,f
+  1894  013A  2939               	goto	u82_27
+  1895  013B  0BF2               	decfsz	??_ngat+1,f
+  1896  013C  2939               	goto	u82_27
+  1897  013D  0BF3               	decfsz	??_ngat+2,f
+  1898  013E  2939               	goto	u82_27
+  1899  013F  2940               	nop2
+  1900                           
+  1901                           ;button.c: 151: fl_RB0=0;
+  1902  0140  1070               	bcf	_fl_RB0/(0+8),_fl_RB0& (0+7)
+  1903                           
+  1904                           ;button.c: 152: fl_RB1=0;
+  1905  0141  10F0               	bcf	_fl_RB1/(0+8),_fl_RB1& (0+7)
+  1906                           
+  1907                           ;button.c: 153: fl_RB2=0;
+  1908  0142  1170               	bcf	_fl_RB2/(0+8),_fl_RB2& (0+7)
+  1909                           
+  1910                           ;button.c: 154: fl_RB3=0;
+  1911  0143  11F0               	bcf	_fl_RB3/(0+8),_fl_RB3& (0+7)
+  1912                           
+  1913                           ;button.c: 155: fl_RB4=1;
+  1914  0144  1670               	bsf	_fl_RB4/(0+8),_fl_RB4& (0+7)
+  1915  0145  2906               	goto	i1l2515
+  1916  0146                     i1l1091:	
+  1917                           
+  1918                           ;button.c: 161: else if (RB5)
+  1919  0146  1E86               	btfss	6,5
+  1920  0147  295C               	goto	i1l1093
+  1921                           
+  1922                           ;button.c: 162: {
+  1923                           ;button.c: 163: _delay((unsigned long)((100)*(20000000/4000.0)));
+  1924  0148  3003               	movlw	3
+  1925  0149  00F3               	movwf	??_ngat+2
+  1926  014A  308A               	movlw	138
+  1927  014B  00F2               	movwf	??_ngat+1
+  1928  014C  3056               	movlw	86
+  1929  014D  00F1               	movwf	??_ngat
+  1930  014E                     u83_27:	
+  1931  014E  0BF1               	decfsz	??_ngat,f
+  1932  014F  294E               	goto	u83_27
+  1933  0150  0BF2               	decfsz	??_ngat+1,f
+  1934  0151  294E               	goto	u83_27
+  1935  0152  0BF3               	decfsz	??_ngat+2,f
+  1936  0153  294E               	goto	u83_27
+  1937  0154  2955               	nop2
+  1938                           
+  1939                           ;button.c: 164: fl_RB0=0;
+  1940  0155  1070               	bcf	_fl_RB0/(0+8),_fl_RB0& (0+7)
+  1941                           
+  1942                           ;button.c: 165: fl_RB1=0;
+  1943  0156  10F0               	bcf	_fl_RB1/(0+8),_fl_RB1& (0+7)
+  1944                           
+  1945                           ;button.c: 166: fl_RB2=0;
+  1946  0157  1170               	bcf	_fl_RB2/(0+8),_fl_RB2& (0+7)
+  1947                           
+  1948                           ;button.c: 167: fl_RB3=0;
+  1949  0158  11F0               	bcf	_fl_RB3/(0+8),_fl_RB3& (0+7)
+  1950                           
+  1951                           ;button.c: 168: fl_RB4=0;
+  1952  0159  1270               	bcf	_fl_RB4/(0+8),_fl_RB4& (0+7)
+  1953                           
+  1954                           ;button.c: 169: fl_RB5=1;
+  1955  015A  16F0               	bsf	_fl_RB5/(0+8),_fl_RB5& (0+7)
+  1956  015B  2907               	goto	i1l2517
+  1957  015C                     i1l1093:	
+  1958                           
+  1959                           ;button.c: 174: else if (RB6)
+  1960  015C  1F06               	btfss	6,6
+  1961  015D  2970               	goto	i1l1095
+  1962                           
+  1963                           ;button.c: 175: {
+  1964                           ;button.c: 176: _delay((unsigned long)((100)*(20000000/4000.0)));
+  1965  015E  3003               	movlw	3
+  1966  015F  00F3               	movwf	??_ngat+2
+  1967  0160  308A               	movlw	138
+  1968  0161  00F2               	movwf	??_ngat+1
+  1969  0162  3056               	movlw	86
+  1970  0163  00F1               	movwf	??_ngat
+  1971  0164                     u84_27:	
+  1972  0164  0BF1               	decfsz	??_ngat,f
+  1973  0165  2964               	goto	u84_27
+  1974  0166  0BF2               	decfsz	??_ngat+1,f
+  1975  0167  2964               	goto	u84_27
+  1976  0168  0BF3               	decfsz	??_ngat+2,f
+  1977  0169  2964               	goto	u84_27
+  1978  016A  296B               	nop2
+  1979                           
+  1980                           ;button.c: 177: fl_RB0=0;
+  1981                           
+  1982                           ;button.c: 178: fl_RB1=0;
+  1983                           
+  1984                           ;button.c: 179: fl_RB2=0;
+  1985                           
+  1986                           ;button.c: 180: fl_RB3=0;
+  1987                           
+  1988                           ;button.c: 181: fl_RB4=0;
+  1989                           
+  1990                           ;button.c: 182: fl_RB5=0;
+  1991  016B  218A  120A  118A   	fcall	PL2	;call to abstracted procedure
+  1992                           
+  1993                           ;button.c: 183: fl_RB6=1;
+  1994  016E  1770               	bsf	_fl_RB6/(0+8),_fl_RB6& (0+7)
+  1995  016F  2908               	goto	i1l2519
+  1996  0170                     i1l1095:	
+  1997                           
+  1998                           ;button.c: 187: else if (RB7)
+  1999  0170  1F86               	btfss	6,7
+  2000  0171  2982               	goto	i1l2629
+  2001                           
+  2002                           ;button.c: 188: {
+  2003                           ;button.c: 189: _delay((unsigned long)((100)*(20000000/4000.0)));
+  2004  0172  3003               	movlw	3
+  2005  0173  00F3               	movwf	??_ngat+2
+  2006  0174  308A               	movlw	138
+  2007  0175  00F2               	movwf	??_ngat+1
+  2008  0176  3056               	movlw	86
+  2009  0177  00F1               	movwf	??_ngat
+  2010  0178                     u85_27:	
+  2011  0178  0BF1               	decfsz	??_ngat,f
+  2012  0179  2978               	goto	u85_27
+  2013  017A  0BF2               	decfsz	??_ngat+1,f
+  2014  017B  2978               	goto	u85_27
+  2015  017C  0BF3               	decfsz	??_ngat+2,f
+  2016  017D  2978               	goto	u85_27
+  2017  017E  297F               	nop2
+  2018                           
+  2019                           ;button.c: 190: fl_RB0=0;
+  2020                           
+  2021                           ;button.c: 191: fl_RB1=0;
+  2022                           
+  2023                           ;button.c: 192: fl_RB2=0;
+  2024                           
+  2025                           ;button.c: 193: fl_RB3=0;
+  2026                           
+  2027                           ;button.c: 194: fl_RB4=0;
+  2028                           
+  2029                           ;button.c: 195: fl_RB5=0;
+  2030  017F  218A               	fcall	PL2	;call to abstracted procedure
+  2031                           
+  2032                           ;button.c: 196: fl_RB6=0;
+  2033  0180  1370               	bcf	_fl_RB6/(0+8),_fl_RB6& (0+7)
+  2034                           
+  2035                           ;button.c: 197: fl_RB7=1;
+  2036  0181  17F0               	bsf	_fl_RB7/(0+8),_fl_RB7& (0+7)
+  2037  0182                     i1l2629:	
+  2038                           
+  2039                           ;button.c: 199: }
+  2040                           ;button.c: 200: }
+  2041                           ;button.c: 201: RBIF=0;
+  2042  0182  100B               	bcf	11,0
+  2043  0183  0875               	movf	??_ngat+4,w
+  2044  0184  008A               	movwf	10
+  2045  0185  0E74               	swapf	(??_ngat+3)^(0+-128),w
+  2046  0186  0083               	movwf	3
+  2047  0187  0EFE               	swapf	126,f
+  2048  0188  0E7E               	swapf	126,w
+  2049  0189  0009               	retfie
+  2050  018A                     __end_of_ngat:	
+  2051  018A                     PL2:	
+  2052  018A  1070               	bcf	_fl_RB0/(0+8),_fl_RB0& (0+7)
+  2053  018B  10F0               	bcf	_fl_RB1/(0+8),_fl_RB1& (0+7)
+  2054  018C  1170               	bcf	_fl_RB2/(0+8),_fl_RB2& (0+7)
+  2055  018D  11F0               	bcf	_fl_RB3/(0+8),_fl_RB3& (0+7)
+  2056  018E  1270               	bcf	_fl_RB4/(0+8),_fl_RB4& (0+7)
+  2057  018F  12F0               	bcf	_fl_RB5/(0+8),_fl_RB5& (0+7)
+  2058  0190  0008               	return
+  2059                           
+  2060                           	psect	intentry
+  2061  0004                     __pintentry:	
+  2062                           ; Regs used in _ngat: [wreg]
+  2063                           
+  2064  0004                     interrupt_function:	
+  2065  007E                     saved_w	set	btemp
+  2066  0004  00FE               	movwf	btemp
+  2067  0005  0E03               	swapf	3,w
+  2068  0006  00F4               	movwf	??_ngat+3
+  2069  0007  080A               	movf	10,w
+  2070  0008  00F5               	movwf	??_ngat+4
+  2071  0009  120A  118A  28E8   	ljmp	_ngat
+  2072                           
+  2073                           	psect	text368
+  2074  0000                     __ptext368:	
+  2075 ;; =============== function _ngat ends ============
+  2076                           
+  2077  007E                     btemp	set	126	;btemp
+  2078  007E                     wtemp0	set	126
+
+
+HI-TECH Software PICC Macro Assembler V9.83 build 10920 
+Symbol Table                                                                                   Thu Mar 17 09:29:40 2022
+
+                   _i 0076                   _GIE 005F                   _RB0 0030                   _RB1 0031  
+                 _RB2 0032                   _RB3 0033                   _RB4 0034                   _RB5 0035  
+                 _RB6 0036                   _RB7 0037                   u405 0283                   u415 01FE  
+                 u425 0224                   u435 019F                   u445 01C5                   u375 02AB  
+                 u455 0328                   u607 009E                   u385 02D1                   u465 02FC  
+                 u617 00B5                   u395 025D                   u707 0207                   u627 00DB  
+                 u717 022D                   u637 0372                   u557 002B                   u727 0244  
+                 u647 0384                   u567 0042                   u737 034B                   u657 0306  
+                 u577 0059                   u747 035D                   u667 0332                   u587 0070  
+                 u757 0266                   u677 01A8                   u597 0087                   u767 028C  
+                 u687 01CE                   u777 02B4                   u697 01E5                   u787 02DA  
+                 _rb0 029D                   _rb1 024F                   _rb2 0343                   _rb3 01F0  
+                 _rb4 0191                   _rb5 0317                   _rb6 02EB                   _rb7 036A  
+                l1122 0000                  l1115 0000                  ?_rb0 0071                  ?_rb1 0071  
+                l1142 0000                  ?_rb2 0071                  ?_rb3 0071                  ?_rb4 0071  
+                l3001 0000                  l1129 0000                  ?_rb5 0071                  ?_rb6 0071  
+                l3011 0000                  l3003 0000                  ?_rb7 0071                  l3013 0000  
+                l3005 01F5                  l3101 0000                  l3031 023B                  l3111 0000  
+                l3033 0000                  l3025 0000                  l3017 0215                  l3105 0000  
+                l3121 0000                  l3113 0000                  l3027 0000                  l3019 021B  
+                l3051 01B6                  l3035 0000                  l3107 0000                  l3131 0021  
+                l3123 0000                  l3115 0000                  l3061 0000                  l3053 01BC  
+                l3045 0000                  l3037 0000                  l3109 0000                  l3141 0000  
+                l3133 0000                  l3125 0000                  l3117 0000                  l3047 0000  
+                l3039 0196                  l3071 0000                  l3151 0000                  l3143 004F  
+                l3135 0000                  l3127 0000                  l3119 0000                  l3065 01DC  
+                l3081 0000                  l3073 031F                  l3161 0094                  l3153 0000  
+                l3145 0000                  l3137 0038                  l3129 00C1                  l3067 0000  
+                l3059 0000                  l3083 0000                  l3091 02F3                  l3171 0000  
+                l3163 0000                  l3155 007D                  l3147 0000                  l3139 0000  
+                l3069 0000                  l3165 0000                  l3157 0000                  l3149 0066  
+                l3079 0000                  l3087 0000                  l3175 0000                  l3167 00AB  
+                l3159 0000                  l3097 0000                  l3089 0000                  l3177 0000  
+                l3169 0000                  l3099 0000                  l2941 0000                  l2951 0000  
+                l2943 02A2                  l2963 0000                  l2955 02C2                  l2939 0000  
+                l2971 0000                  l2965 0000                  l2957 02C8                  l2949 0000  
+                l2981 0000                  l2973 0254                  l2993 0000                  l2985 0274  
+                l2969 0000                  l2995 0000                  l2987 027A                  l2979 0000  
+                l2999 0000                  _IOCB 0096                  _PEIE 005E                  _RBIE 005B  
+                _RBIF 0058                  _main 000F                  _ngat 00E8                  btemp 007E  
+                start 000C                 ??_rb0 0020                 ??_rb1 0020                 ??_rb2 0020  
+               ??_rb3 0020                 ??_rb4 0020                 ??_rb5 0020                 ??_rb6 0020  
+               ??_rb7 0020                 ?_main 0071                 ?_ngat 0071                 _ANSEL 0188  
+               _PORTC 0007                 _PORTD 0008                 u80_27 0112                 _TRISB 0086  
+               _TRISC 0087                 _TRISD 0088                 u81_27 0125                 u82_27 0139  
+               u83_27 014E                 u84_27 0164                 u85_27 0178                 u79_27 00FA  
+      __pbitbssCOMMON 0380                 pclath 000A                 status 0003                 wtemp0 007E  
+        __end_of_main 00E8          __end_of_ngat 018A                ??_main 0023                ??_ngat 0071  
+              _ANSELH 0189                i1l1091 0146                i1l1083 00F2                i1l1093 015C  
+              i1l1085 010A                i1l1095 0170                i1l1087 011D                i1l1089 0131  
+              i1l1098 0000                i1l2511 0104                i1l2601 0000                i1l2513 0105  
+              i1l2505 0000                i1l2603 0000                i1l2523 0000                i1l2515 0106  
+              i1l2507 0000                i1l2621 0000                i1l2613 0000                i1l2605 0000  
+              i1l2541 0000                i1l2525 0000                i1l2517 0107                i1l2509 0000  
+              i1l2623 0000                i1l2615 0000                i1l2607 0000                i1l2543 0000  
+              i1l2527 0000                i1l2519 0108                i1l2625 0000                i1l2617 0000  
+              i1l2561 0000                i1l2545 0000                i1l2627 0000                i1l2619 0000  
+              i1l2563 0000                i1l2547 0000                i1l2581 0000                i1l2565 0000  
+              i1l2629 0182                i1l2583 0000                i1l2567 0000                i1l2559 0000  
+              i1l2495 0000                i1l2585 0000                i1l2577 0000                i1l2595 0000  
+              i1l2587 0000                i1l2579 0000                i1l2597 0000                i1l2599 0000  
+              _fl_RB0 0380                _fl_RB1 0381                _fl_RB2 0382                _fl_RB3 0383  
+              _fl_RB4 0384                _fl_RB5 0385                _fl_RB6 0386                _fl_RB7 0387  
+              saved_w 007E        __pcstackCOMMON 0071            __pmaintext 000F            __pintentry 0004  
+        __size_of_rb0 004B          __size_of_rb1 004B          __size_of_rb2 0027          __size_of_rb3 005C  
+        __size_of_rb4 005C          __size_of_rb5 002C          __size_of_rb6 002C          __size_of_rb7 0026  
+end_of_initialization 0393   start_initialization 0390           __end_of_rb0 02E8           __end_of_rb1 029A  
+         __end_of_rb2 036A           __end_of_rb3 024C           __end_of_rb4 01ED           __end_of_rb5 0343  
+         __end_of_rb6 0317           __end_of_rb7 0390           __pbssCOMMON 0076         __pcstackBANK0 0020  
+           __ptext360 02EB             __ptext361 0317             __ptext362 0191             __ptext363 01F0  
+           __ptext364 0343             __ptext365 024F             __ptext366 029D             __ptext358 0000  
+           __ptext367 00E8             __ptext359 036A             __ptext368 0000     interrupt_function 0004  
+       __size_of_main 00D9         __size_of_ngat 00A2              intlevel1 0000  
